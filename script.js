@@ -1,4 +1,68 @@
 // ===========================
+// BACKGROUND MUSIC CONTROL
+// ===========================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const music = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = musicToggle.querySelector('.music-icon');
+    
+    // Set initial volume
+    music.volume = 0.5;
+    
+    // Try to play immediately
+    function attemptPlay() {
+        const playPromise = music.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(function() {
+                // Autoplay started successfully
+                musicToggle.classList.remove('muted');
+                musicIcon.textContent = '🔊';
+            }).catch(function(error) {
+                // Autoplay was prevented - show muted icon
+                console.log('Autoplay prevented. Waiting for user interaction.');
+                musicToggle.classList.add('muted');
+                musicIcon.textContent = '🔇';
+                // Make the button pulse to draw attention
+                musicToggle.style.animation = 'pulse 2s infinite';
+            });
+        }
+    }
+    
+    // Try to play on load
+    attemptPlay();
+    
+    // Try to play on any user interaction
+    function playOnInteraction() {
+        if (music.paused) {
+            attemptPlay();
+        }
+        // Remove listeners after first successful interaction
+        document.removeEventListener('touchstart', playOnInteraction);
+        document.removeEventListener('click', playOnInteraction);
+    }
+    
+    document.addEventListener('touchstart', playOnInteraction, { passive: true });
+    document.addEventListener('click', playOnInteraction);
+    
+    // Toggle music on button click
+    musicToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (music.paused) {
+            music.play();
+            musicToggle.classList.remove('muted');
+            musicIcon.textContent = '🔊';
+            musicToggle.style.animation = 'none';
+        } else {
+            music.pause();
+            musicToggle.classList.add('muted');
+            musicIcon.textContent = '🔇';
+        }
+    });
+});
+
+// ===========================
 // COUNTDOWN TIMER
 // ===========================
 

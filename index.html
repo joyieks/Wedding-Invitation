@@ -11,6 +11,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Background Music -->
+    <audio id="backgroundMusic" autoplay loop playsinline preload="auto">
+        <source src="song/song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- Music Control Button -->
+    <button id="musicToggle" class="music-toggle">
+        <span class="music-icon">🔊</span>
+    </button>
+    
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="tartan-overlay"></div>
@@ -18,7 +29,7 @@
             <div class="ornament-divider top"></div>
             <h1 class="script-font">Sharon & Perry</h1>
             <div class="ornament-line"></div>
-            <p class="wedding-announce">Together with their families, joyfully invite you to celebrate their wedding</p>
+            <p class="wedding-announce">You are invited to celebrate our special day.<br>The presence of you and your family would be an honor to us.<br>Please click the button below to confirm your attendance.</p>
             <div class="wedding-date">
                 <p class="date-text">May 18, 2026</p>
                 <p class="time-text">4:00 PM</p>

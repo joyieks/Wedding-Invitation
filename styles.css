@@ -66,6 +66,51 @@ section.hero {
 }
 
 /* ===========================
+   MUSIC TOGGLE BUTTON
+   =========================== */
+
+.music-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    border: 3px solid var(--accent-gold);
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-toggle:hover {
+    transform: scale(1.1);
+    background: var(--primary-red);
+}
+
+.music-toggle.muted {
+    background: var(--text-light);
+    border-color: var(--text-light);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 8px 30px rgba(218, 165, 32, 0.6);
+    }
+}
+
+/* ===========================
    TYPOGRAPHY
    =========================== */
 
