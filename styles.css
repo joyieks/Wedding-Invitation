@@ -46,6 +46,26 @@ body {
 }
 
 /* ===========================
+   SCROLL ANIMATIONS
+   =========================== */
+
+section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.scroll-reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section.hero {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================
    TYPOGRAPHY
    =========================== */
 
@@ -231,7 +251,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 40px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin-top: 50px;
 }
 
@@ -827,19 +847,19 @@ body {
     }
     
     .countdown {
-        gap: 20px;
+        gap: 10px;
     }
     
     .countdown-item {
-        min-width: 80px;
+        min-width: 70px;
     }
     
     .countdown-value {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     
     .countdown-label {
-        font-size: 0.85rem;
+        font-size: 0.7rem;
     }
     
     .gallery-grid {

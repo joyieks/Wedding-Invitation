@@ -270,6 +270,34 @@ window.addEventListener('scroll', function() {
 });
 
 // ===========================
+// SCROLL ANIMATIONS
+// ===========================
+
+function revealOnScroll() {
+    const elements = document.querySelectorAll('section');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        const revealPoint = 150;
+        
+        if (elementTop < windowHeight - revealPoint) {
+            element.classList.add('scroll-reveal');
+        }
+    });
+}
+
+// Initial check on page load
+document.addEventListener('DOMContentLoaded', function() {
+    revealOnScroll();
+});
+
+// Check on scroll
+window.addEventListener('scroll', function() {
+    revealOnScroll();
+});
+
+// ===========================
 // PREVENT FORM RESUBMISSION ON REFRESH
 // ===========================
 
