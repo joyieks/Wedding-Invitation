@@ -338,7 +338,7 @@ window.addEventListener('scroll', function() {
 // ===========================
 
 function revealOnScroll() {
-    const elements = document.querySelectorAll('section');
+    const elements = document.querySelectorAll('section:not(.entourage-section)');
     
     elements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
@@ -349,11 +349,21 @@ function revealOnScroll() {
             element.classList.add('scroll-reveal');
         }
     });
+    
+    // Always keep entourage section visible
+    const entourageSection = document.querySelector('.entourage-section');
+    if (entourageSection) {
+        entourageSection.classList.add('scroll-reveal');
+    }
 }
 
 // Initial check on page load
 document.addEventListener('DOMContentLoaded', function() {
     revealOnScroll();
+    // Force reveal all sections immediately for debugging
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('scroll-reveal');
+    });
 });
 
 // Check on scroll
@@ -368,3 +378,70 @@ window.addEventListener('scroll', function() {
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
 }
+
+// ===========================
+// ENVELOPE ANIMATION
+// ===========================
+
+// Force scroll to top on page load/refresh
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+
+window.addEventListener('beforeunload', function() {
+    window.scrollTo(0, 0);
+});
+
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 0);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    const closedEnvelope = document.getElementById('closedEnvelope');
+    const invitationCard = document.getElementById('invitationCard');
+    const openInvitationBtn = document.getElementById('openInvitation');
+    const envelopeOverlay = document.getElementById('envelopeOverlay');
+    
+    // Step 1: Click to open envelope
+    if (closedEnvelope) {
+        closedEnvelope.addEventListener('click', function() {
+            // Add opening animation class
+            closedEnvelope.classList.add('opening');
+            
+            // After envelope opens, show the invitation card
+            setTimeout(function() {
+                closedEnvelope.style.opacity = '0';
+                closedEnvelope.style.transform = 'scale(0.8)';
+                
+                setTimeout(function() {
+                    closedEnvelope.style.display = 'none';
+                    invitationCard.classList.remove('hidden');
+                    
+                    // Show card with animation
+                    setTimeout(function() {
+                        invitationCard.classList.add('show');
+                    }, 50);
+                }, 500);
+            }, 1000);
+        });
+    }
+    
+    // Step 2: Click to open full invitation
+    if (openInvitationBtn) {
+        openInvitationBtn.addEventListener('click', function() {
+            // Fade out the envelope overlay
+            envelopeOverlay.classList.add('fade-out');
+            
+            // Remove overlay from DOM after animation
+            setTimeout(function() {
+                envelopeOverlay.style.display = 'none';
+            }, 800);
+        });
+    }
+});

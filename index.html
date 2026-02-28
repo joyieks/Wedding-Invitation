@@ -11,6 +11,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Envelope Overlay -->
+    <div id="envelopeOverlay" class="envelope-overlay">
+        <div class="envelope-container">
+            <!-- Closed Envelope -->
+            <div id="closedEnvelope" class="envelope-wrapper">
+                <div class="envelope">
+                    <div class="envelope-back"></div>
+                    <div class="envelope-front"></div>
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-seal">
+                        <div class="seal-icon">❤</div>
+                    </div>
+                    <div class="floral-decoration top-left"></div>
+                    <div class="floral-decoration top-right"></div>
+                    <div class="floral-decoration bottom-left"></div>
+                    <div class="floral-decoration bottom-right"></div>
+                </div>
+                <p class="envelope-instruction">Click to open</p>
+            </div>
+
+            <!-- Invitation Card (hidden initially) -->
+            <div id="invitationCard" class="invitation-card hidden">
+                <div class="card-content">
+                    <div class="card-frame">
+                        <div class="couple-photo">
+                            <img src="imgs/mainpictita.png" alt="Sharon & Perry" onerror="this.src='imgs/tita1.jpg'">
+                        </div>
+                        <h1 class="couple-names script-font">Sharon & Perry</h1>
+                        <div class="wedding-text">
+                            <p class="getting-married">ARE GETTING MARRIED</p>
+                        </div>
+                        <div class="card-date">May 18, 2026</div>
+                        <button id="openInvitation" class="btn-open-invitation">Open Invitation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Background Music -->
     <audio id="backgroundMusic" autoplay loop playsinline preload="auto">
         <source src="song/song.mp3" type="audio/mpeg">
@@ -165,43 +204,131 @@
             <div class="ornament-divider-small"></div>
             
             <div class="entourage-categories">
+                <!-- Priest -->
+                <div class="entourage-category">
+                    <h3>Priest</h3>
+                    <div class="entourage-grid-single">
+                        <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Fr. Diony Tabiliran" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Fr. Diony Tabiliran</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Principal Sponsors -->
                 <div class="entourage-category">
                     <h3>Principal Sponsors</h3>
                     <div class="entourage-grid-paired">
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Ismael L. Segundo" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Ismael L. Segundo</p>
                         </div>
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Marvie O. Segundo" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Marvie O. Segundo</p>
                         </div>
                         
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Ronald E. Reyes" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Ronald E. Reyes</p>
                         </div>
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Ermelita L. Reyes" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Ermelita L. Reyes</p>
                         </div>
                         
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Dominador Lopez" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Dominador Lopez</p>
                         </div>
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Meriam Llanes" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Meriam Llanes</p>
                         </div>
                         
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Levin H. Velasco" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Levin H. Velasco</p>
                         </div>
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Marina R. Velasco" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Marina R. Velasco</p>
                         </div>
                         
                         <div class="entourage-member">
-                            <p class="member-name">Mr. Nilo Otoc</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Atty. Wendel E. Avisado" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Atty. Wendel E. Avisado</p>
                         </div>
                         <div class="entourage-member">
-                            <p class="member-name">Mrs. Gemma B. Otoc</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Nicanora D. Adlao" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Nicanora D. Adlao</p>
+                        </div>
+                        
+                        <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Lazaro F. Lamparas Jr." onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Lazaro F. Lamparas Jr.</p>
+                        </div>
+                        <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Rosalia D. Lamparas" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Rosalia D. Lamparas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Sponsors -->
+                <div class="entourage-category">
+                    <h3>Secondary Sponsors</h3>
+                    <div class="entourage-grid-paired">
+                        <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Carlito Omoso" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Carlito Omoso</p>
+                        </div>
+                        <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Presentacion Omoso" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Presentacion Omoso</p>
+                        </div>
+                        
+                        <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Neil B. Jadraque" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Neil B. Jadraque</p>
+                        </div>
+                        <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Peachy P. Jadraque" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Peachy P. Jadraque</p>
                         </div>
                     </div>
                 </div>
@@ -209,8 +336,11 @@
                 <!-- Matron of Honor -->
                 <div class="entourage-category">
                     <h3>Matron of Honor</h3>
-                    <div class="entourage-grid two-col">
+                    <div class="entourage-grid-single">
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Betchie P. Toyama" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Betchie P. Toyama</p>
                         </div>
                     </div>
@@ -219,8 +349,11 @@
                 <!-- Best Man -->
                 <div class="entourage-category">
                     <h3>Best Man</h3>
-                    <div class="entourage-grid two-col">
+                    <div class="entourage-grid-single">
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Deo Jean Pinote" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Deo Jean Pinote</p>
                         </div>
                     </div>
@@ -231,183 +364,367 @@
                     <h3>Bridesmaids & Groomsmen</h3>
                     <div class="entourage-grid-paired">
                         <div class="entourage-member color-indicator-red">
-                            <p class="member-name">Mr. Dionel Batistil</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Joey John Omoso" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Joey John Omoso</p>
                         </div>
                         <div class="entourage-member color-indicator-red">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Antonette L. Tanchico" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Antonette L. Tanchico</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-red">
-                            <p class="member-name">Mr. Neil B. Jadraque</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Dionel Batistel" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Dionel Batistel</p>
                         </div>
                         <div class="entourage-member color-indicator-red">
-                            <p class="member-name">Mrs. Peachy P. Jadraque</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Deborah Mae A. Batistel" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Deborah Mae A. Batistel</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-red">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Joselito Lonzon" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Joselito Lonzon</p>
                         </div>
                         <div class="entourage-member color-indicator-red">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Gemma B. Lonzon" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Gemma B. Lonzon</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-red">
-                            <p class="member-name">Mr. Carlito Omoso</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Michael John R. Bula" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Michael John R. Bula</p>
                         </div>
                         <div class="entourage-member color-indicator-red">
-                            <p class="member-name">Mrs. Presentacion Omoso</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Barbara J. Bula" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Barbara J. Bula</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-red">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Jorge Pinote" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Jorge Pinote</p>
+                        </div>
+                        <div class="entourage-member color-indicator-red">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Cecelia Cosing" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Cecelia Cosing</p>
+                        </div>
+                        
+                        <div class="entourage-member color-indicator-red">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Felix Bagol" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Felix Bagol</p>
                         </div>
                         <div class="entourage-member color-indicator-red">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Beatriz Bagol" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Beatriz Bagol</p>
                         </div>
                         
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Herosdie Cedeño</p>
+                        <div class="entourage-member color-indicator-red">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Cossette Navales" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Cossette Navales</p>
                         </div>
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mrs. Graldine Arobo</p>
+                        <div class="entourage-member color-indicator-red">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Dreamer Iactasa" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Miss Dreamer Iactasa</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Juerry Bemm P. Salva" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Juerry Bemm P. Salva</p>
                         </div>
                         <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Sharade P. Fernandez" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Sharade P. Fernandez</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Louie John Omoso</p>
-                        </div>
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Miss Louwela Dou</p>
-                        </div>
-                        
-                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Cris L. Machitar" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Cris L. Machitar</p>
                         </div>
                         <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Ma Lorena M. Machitar" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Ma Lorena M. Machitar</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Romie A. Cabatic</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Herosdie Cedeño" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Herosdie Cedeño</p>
                         </div>
                         <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mrs. Lady Diana O. Cabatic</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Graldine Arobo" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Graldine Arobo</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Louie John Omoso" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Louie John Omoso</p>
+                        </div>
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Louwela Dou" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Miss Louwela Dou</p>
+                        </div>
+                        
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Michael Libetan" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Michael Libetan</p>
                         </div>
                         <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Elsilyn Cuizon" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Elsilyn Cuizon</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Hermoso M. Matuguinas</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Christain Kyle Crisologo" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Christain Kyle Crisologo</p>
                         </div>
                         <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mrs. Alicia S. Dalumpines</p>
-                        </div>
-                        
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Ruel Ceasar Cuizon</p>
-                        </div>
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mrs. Jenelyn Cuizon</p>
-                        </div>
-                        
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Jeremy R. Lopez</p>
-                        </div>
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mrs. Rochelle M. Lopez</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Annabelle M. Crisologo" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Annabelle M. Crisologo</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Janel Omoso</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Emmanual P. Enojarda" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Emmanual P. Enojarda</p>
                         </div>
                         <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Miss Irish Plaza</p>
-                        </div>
-                        
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Nichole Alcebar</p>
-                        </div>
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mrs. Imee Johanne S. Alcebar</p>
-                        </div>
-                        
-                        <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Emmamaul P. Enojarda</p>
-                        </div>
-                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Joan Virador" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mrs. Joan Virador</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Mr. Joey John Omoso</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Hermoso M. Matuguinas" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Hermoso M. Matuguinas</p>
                         </div>
                         <div class="entourage-member color-indicator-green">
-                            <p class="member-name">Miss Dreamer Iactasa</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Alicia S. Dalumpines" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Miss Alicia S. Dalumpines</p>
+                        </div>
+                        
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Janel Omoso" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Janel Omoso</p>
+                        </div>
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Irish Plaza" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Miss Irish Plaza</p>
+                        </div>
+                        
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Nichole Alcebar" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Nichole Alcebar</p>
+                        </div>
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Imee Johanne S. Alcebar" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Imee Johanne S. Alcebar</p>
+                        </div>
+                        
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Jeremy R. Lopez" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Jeremy R. Lopez</p>
+                        </div>
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Rochelle M. Lopez" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Rochelle M. Lopez</p>
+                        </div>
+                        
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Ruel Ceasar Cuizon" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Ruel Ceasar Cuizon</p>
+                        </div>
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Jenelyn Cuizon" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Jenelyn Cuizon</p>
+                        </div>
+                        
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Romie A. Cabatic" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Romie A. Cabatic</p>
+                        </div>
+                        <div class="entourage-member color-indicator-green">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mrs. Lady Diana O. Cabatic" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mrs. Lady Diana O. Cabatic</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Secondary Sponsors -->
+                <!-- Candle, Veil & Cord Bearers -->
                 <div class="entourage-category">
+                    <h3>Candle, Veil & Cord Bearers</h3>
                     <div class="entourage-grid-paired">
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Michael Aaron Cuizon" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Michael Aaron Cuizon</p>
                         </div>
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Niña Jade P. Fernandez" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Miss Niña Jade P. Fernandez</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Joseph Arol Cuizon" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Joseph Arol Cuizon</p>
                         </div>
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Joan Joy Diocampo" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Miss Joan Joy Diocampo</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Jay Are I. Maynagcot" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Jay Are I. Maynagcot</p>
                         </div>
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Heidi R. Vleasco" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Miss Heidi R. Vleasco</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-skyblue">
-                            <p class="member-name">Mr. Ismael L. Segundo Jr.</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Ismael O. Segundo Jr." onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Ismael O. Segundo Jr.</p>
                         </div>
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Chamberlene M. Raotraot" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Miss Chamberlene M. Raotraot</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Ivan O. Segundo" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Ivan O. Segundo</p>
                         </div>
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Kyle Andrea A. Balbin" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Miss Kyle Andrea A. Balbin</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Aaron Josh O. Cabatic" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Mr. Aaron Josh O. Cabatic</p>
                         </div>
                         <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Nathalie Kate O. Cabatic" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Miss Nathalie Kate O. Cabatic</p>
                         </div>
                         
                         <div class="entourage-member color-indicator-skyblue">
-                            <p class="member-name">Miss Tracy Frances P. Fernandez</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Mr. Gregor Graf" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Mr. Gregor Graf</p>
                         </div>
                         <div class="entourage-member color-indicator-skyblue">
-                            <p class="member-name">Miss Elyssa Cuizon</p>
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Giamae B. Lonzon" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Miss Giamae B. Lonzon</p>
+                        </div>
+                        
+                        <div class="entourage-member color-indicator-skyblue">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Miss Tracy Frances P. Fernandez" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Miss Tracy Frances P. Fernandez</p>
                         </div>
                     </div>
                 </div>
@@ -417,16 +734,34 @@
                     <h3>Flower Girls</h3>
                     <div class="entourage-grid">
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Angel Nicole Arobo" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Angel Nicole Arobo</p>
                         </div>
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Cholenne Angela S. Alcebar" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Cholenne Angela S. Alcebar</p>
                         </div>
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Shilo Faith O. Cabatic" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Shilo Faith O. Cabatic</p>
                         </div>
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Selena Marie C. Peter" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Selena Marie C. Peter</p>
+                        </div>
+                        <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Daniela Rizz A. Batistel" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
+                            <p class="member-name">Daniela Rizz A. Batistel</p>
                         </div>
                     </div>
                 </div>
@@ -434,8 +769,11 @@
                 <!-- Bible Bearer -->
                 <div class="entourage-category">
                     <h3>Bible Bearer</h3>
-                    <div class="entourage-grid two-col">
+                    <div class="entourage-grid-single">
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Imry L. Segundo" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Imry L. Segundo</p>
                         </div>
                     </div>
@@ -444,8 +782,11 @@
                 <!-- Ring Bearer -->
                 <div class="entourage-category">
                     <h3>Ring Bearer</h3>
-                    <div class="entourage-grid two-col">
+                    <div class="entourage-grid-single">
                         <div class="entourage-member">
+                            <div class="member-photo">
+                                <img src="imgs/entourage/entouragepic.jpg" alt="Zebi Crizeign M. Machitar" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                            </div>
                             <p class="member-name">Zebi Crizeign M. Machitar</p>
                         </div>
                     </div>
