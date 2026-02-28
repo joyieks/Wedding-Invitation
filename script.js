@@ -407,17 +407,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const invitationCard = document.getElementById('invitationCard');
     const openInvitationBtn = document.getElementById('openInvitation');
     const envelopeOverlay = document.getElementById('envelopeOverlay');
+    const envelopePaper = document.getElementById('envelopePaper');
     
     // Step 1: Click to open envelope
     if (closedEnvelope) {
         closedEnvelope.addEventListener('click', function() {
-            // Add opening animation class
+            // Add opening animation class (opens flap and shows text)
             closedEnvelope.classList.add('opening');
             
-            // After envelope opens, show the invitation card
+            // Wait 2 seconds after envelope opens, then show invitation card
             setTimeout(function() {
+                // Fade out the closed envelope
                 closedEnvelope.style.opacity = '0';
-                closedEnvelope.style.transform = 'scale(0.8)';
+                closedEnvelope.style.transform = 'scale(0.95)';
+                closedEnvelope.style.transition = 'all 0.6s ease';
                 
                 setTimeout(function() {
                     closedEnvelope.style.display = 'none';
@@ -427,20 +430,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(function() {
                         invitationCard.classList.add('show');
                     }, 50);
-                }, 500);
-            }, 1000);
+                }, 600);
+            }, 2000); // Wait 2 seconds after envelope opens
         });
     }
     
-    // Step 2: Click to open full invitation
+    // Step 2: Click "Open Invitation" to show full page
     if (openInvitationBtn) {
         openInvitationBtn.addEventListener('click', function() {
-            // Fade out the envelope overlay
-            envelopeOverlay.classList.add('fade-out');
-            
-            // Remove overlay from DOM after animation
+            envelopeOverlay.style.opacity = '0';
+            envelopeOverlay.style.transition = 'opacity 0.8s ease';
             setTimeout(function() {
-                envelopeOverlay.style.display = 'none';
+                if (envelopeOverlay && envelopeOverlay.parentNode) {
+                    envelopeOverlay.parentNode.removeChild(envelopeOverlay);
+                }
             }, 800);
         });
     }

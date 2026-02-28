@@ -1216,6 +1216,7 @@ section.entourage-section {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     filter: drop-shadow(0 15px 35px rgba(139, 0, 0, 0.15))
             drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    overflow: visible;
 }
 
 .envelope-wrapper:hover {
@@ -1226,6 +1227,7 @@ section.entourage-section {
 
 .envelope-wrapper.opening {
     animation: envelopeShake 0.5s ease;
+    overflow: visible;
 }
 
 @keyframes envelopeShake {
@@ -1240,6 +1242,7 @@ section.entourage-section {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
+    overflow: visible;
 }
 
 .envelope-back {
@@ -1254,6 +1257,7 @@ section.entourage-section {
         inset 0 -1px 0 rgba(218, 165, 32, 0.1),
         0 5px 15px rgba(0, 0, 0, 0.05);
     overflow: hidden;
+    z-index: 1;
 }
 
 .envelope-back::before {
@@ -1283,6 +1287,7 @@ section.entourage-section {
     border: 2px solid var(--accent-gold);
     border-radius: 8px;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%);
+    z-index: 3;
 }
 
 .envelope-front::after {
@@ -1321,29 +1326,36 @@ section.entourage-section {
         0 3px 10px rgba(0, 0, 0, 0.15);
 }
 
-.envelope-flap::before {
-    content: '';
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 18px;
-    height: 18px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
-    border-radius: 50%;
-    box-shadow: 
-        -9px 0 0 -3px rgba(255, 255, 255, 0.3),
-        9px 0 0 -3px rgba(255, 255, 255, 0.3),
-        0 -9px 0 -3px rgba(255, 255, 255, 0.3),
-        0 9px 0 -3px rgba(255, 255, 255, 0.3),
-        -6px -6px 0 -5px rgba(255, 255, 255, 0.25),
-        6px -6px 0 -5px rgba(255, 255, 255, 0.25),
-        -6px 6px 0 -5px rgba(255, 255, 255, 0.25),
-        6px 6px 0 -5px rgba(255, 255, 255, 0.25);
-}
-
 .envelope-wrapper.opening .envelope-flap {
     transform: rotateX(180deg);
+    z-index: 4;
+}
+
+/* S&P Logo on flap - hidden when closed, counter-rotated to stay upright */
+.flap-logo {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.8rem;
+    color: rgba(245, 230, 211, 0.95);
+    letter-spacing: 5px;
+    text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(218, 165, 32, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease 0.5s, visibility 0s 0.5s;
+    z-index: 11;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.envelope-wrapper.opening .flap-logo {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) rotateX(180deg);
+    transition: opacity 0.6s ease 0.5s, visibility 0s, transform 0s;
 }
 
 .envelope-seal {
@@ -1362,22 +1374,140 @@ section.entourage-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 11;
+    z-index: 12;
     box-shadow: 
         0 0 0 3px rgba(218, 165, 32, 0.2),
         0 6px 20px rgba(139, 0, 0, 0.4),
         inset 0 2px 4px rgba(255, 255, 255, 0.2),
         inset 0 -2px 4px rgba(0, 0, 0, 0.3);
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: none;
 }
 
 .envelope-wrapper.opening .envelope-seal {
-    transform: translateX(-50%) rotateX(180deg);
+    transform: translateX(-50%);
+    z-index: 12;
 }
 
 .seal-icon {
     font-size: 2rem;
     color: white;
+}
+
+/* Envelope Paper */
+.envelope-paper {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    width: 85%;
+    height: 220px;
+    background: linear-gradient(to bottom, #ffffff 0%, #fefdfb 100%);
+    border: 2px solid rgba(218, 165, 32, 0.3);
+    border-radius: 8px 8px 0 0;
+    box-shadow: 
+        0 -5px 20px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 0 0 8px rgba(255, 255, 255, 0.5);
+    z-index: 2;
+    opacity: 1;
+    transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+}
+
+.envelope-wrapper.opening .envelope-paper {
+    transform: translateX(-50%) translateY(-110px);
+    opacity: 1;
+    z-index: 9;
+}
+
+.paper-content {
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.paper-content > * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.6s ease;
+}
+
+.envelope-wrapper.opening .paper-content > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Text inside envelope back */
+.envelope-text {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.8s;
+    z-index: 10;
+    width: 85%;
+    padding: 5px;
+}
+
+.envelope-wrapper.opening .envelope-text {
+    opacity: 1;
+}
+
+.envelope-invite {
+    font-size: 0.9rem;
+    color: var(--primary-blue);
+    letter-spacing: 1.5px;
+    font-style: italic;
+    margin: 3px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+}
+
+.envelope-line-top,
+.envelope-line-bottom {
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(218, 165, 32, 0.6) 50%,
+        transparent
+    );
+    margin: 15px auto;
+}
+
+.envelope-title {
+    font-size: 3.5rem;
+    color: var(--primary-blue);
+    letter-spacing: 4px;
+    margin: 15px 0;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    font-weight: 400;
+}
+
+.envelope-subtitle {
+    font-size: 0.7rem;
+    color: var(--primary-red);
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin: 3px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.envelope-date {
+    font-size: 0.85rem;
+    color: var(--primary-gold);
+    letter-spacing: 1.5px;
+    margin: 3px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
 }
 
 /* Floral Decorations */
@@ -1549,9 +1679,13 @@ section.entourage-section {
     color: var(--primary-blue);
     animation: pulse 2.5s ease-in-out infinite;
     padding: 0 45px;
-    position: relative;
     text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
     letter-spacing: 1px;
+    opacity: 1;
+    visibility: visible;
+    z-index: 10005;
+    pointer-events: none;
+    white-space: nowrap;
 }
 
 .envelope-instruction::before {
@@ -1591,6 +1725,11 @@ section.entourage-section {
 @keyframes pulse {
     0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
     50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+}
+
+.envelope-wrapper.opening .envelope-instruction {
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 /* Invitation Card */
@@ -1889,6 +2028,66 @@ section.entourage-section {
         height: 224px;
     }
     
+    .envelope-paper {
+        width: 92%;
+        height: 180px;
+        top: 96px;
+    }
+    
+    .envelope-wrapper.opening .envelope-paper {
+        transform: translateX(-50%) translateY(-88px);
+    }
+    
+    .paper-content {
+        padding-top: 10px;
+        padding: 10px;
+    }
+    
+    .envelope-title {
+        font-size: 1.8rem;
+    }
+    
+    .envelope-subtitle {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+    
+    .flap-logo {
+        font-size: 2rem;
+        letter-spacing: 3px;
+        top: 25%;
+    }
+    
+    .envelope-text {
+        top: 28%;
+    }
+    
+    .envelope-invite {
+        font-size: 0.75rem;
+        margin: 2px 0;
+    }
+    
+    .envelope-subtitle {
+        font-size: 0.6rem;
+        letter-spacing: 1.5px;
+        margin: 2px 0;
+    }
+    
+    .envelope-date {
+        font-size: 0.7rem;
+        margin: 2px 0;
+    }
+    
+    .envelope-date {
+        font-size: 0.9rem;
+    }
+    
+    .envelope-line-top,
+    .envelope-line-bottom {
+        width: 70px;
+        margin: 10px auto;
+    }
+    
     .floral-decoration {
         width: 60px;
         height: 60px;
@@ -1939,6 +2138,7 @@ section.entourage-section {
     
     .envelope-instruction {
         padding: 0 35px;
+        font-size: 1.1rem;
     }
 }
 
