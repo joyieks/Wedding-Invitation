@@ -407,7 +407,7 @@ section.entourage-section {
     border-radius: 20px;
     padding: 35px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    border: 2px solid var(--accent-gold);
+    border: none;
 }
 
 .calendar-header {
@@ -452,6 +452,8 @@ section.entourage-section {
     transition: all 0.3s ease;
     position: relative;
     background: #f8f8f8;
+    border: none;
+    box-shadow: none;
 }
 
 .calendar-day.empty {
@@ -468,18 +470,18 @@ section.entourage-section {
     color: white;
     font-weight: bold;
     font-size: 1.3rem;
-    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.4);
+    box-shadow: none;
     transform: scale(1.15);
-    border: 3px solid var(--accent-gold);
+    border: none;
     animation: pulse-wedding 2s ease-in-out infinite;
 }
 
 @keyframes pulse-wedding {
     0%, 100% {
-        box-shadow: 0 8px 20px rgba(183, 28, 28, 0.4);
+        box-shadow: none;
     }
     50% {
-        box-shadow: 0 12px 30px rgba(183, 28, 28, 0.6);
+        box-shadow: none;
     }
 }
 
@@ -515,9 +517,9 @@ section.entourage-section {
     position: relative;
     max-width: 800px;
     margin: 40px auto;
-    border-radius: 15px;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    box-shadow: none;
 }
 
 .carousel-container {
@@ -608,9 +610,9 @@ section.entourage-section {
 .gallery-item {
     position: relative;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 0;
     aspect-ratio: 4 / 3;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: none;
     cursor: pointer;
 }
 
@@ -659,9 +661,9 @@ section.entourage-section {
 .venue-card {
     background: white;
     padding: 40px 30px;
-    border-radius: 15px;
+    border-radius: 0;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: none;
     transition: transform 0.3s ease;
 }
 
@@ -711,11 +713,11 @@ section.entourage-section {
 }
 
 .venue-image-container {
-    border-radius: 10px;
+    border-radius: 0;
     overflow: hidden;
     margin-top: 20px;
     margin-bottom: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    box-shadow: none;
 }
 
 .venue-image {
@@ -811,16 +813,16 @@ section.entourage-section {
     text-align: center;
     padding: 20px 15px;
     background: white;
-    border: 2px solid var(--light-cream);
-    border-radius: 10px;
+    border: none;
+    border-radius: 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: none;
 }
 
 .entourage-member:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    border-color: var(--accent-gold);
+    box-shadow: none;
+    border-color: transparent;
 }
 
 .member-photo {
@@ -829,8 +831,8 @@ section.entourage-section {
     margin: 0 auto 15px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid var(--accent-gold);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: none;
+    box-shadow: none;
 }
 
 .member-photo img {
@@ -901,9 +903,9 @@ section.entourage-section {
     height: 250px;
     object-fit: contain;
     background: white;
-    border-radius: 10px;
+    border-radius: 0;
     padding: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    box-shadow: none;
 }
 
 .dresscode-icon {
@@ -945,8 +947,8 @@ section.entourage-section {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 3px solid white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border: none;
+    box-shadow: none;
     transition: transform 0.3s ease;
     cursor: pointer;
 }
@@ -971,8 +973,8 @@ section.entourage-section {
 
 .faq-item {
     margin-bottom: 20px;
-    border: 2px solid var(--light-cream);
-    border-radius: 10px;
+    border: none;
+    border-radius: 0;
     overflow: hidden;
     transition: border-color 0.3s ease;
 }
@@ -1041,8 +1043,8 @@ section.entourage-section {
     margin: 50px auto 0;
     background: white;
     padding: 50px 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .form-group {
@@ -1242,7 +1244,7 @@ section.entourage-section {
     .calendar-day.wedding-day {
         font-size: 1.1rem;
         transform: scale(1.12);
-        border-width: 2px;
+        border: none;
     }
     
     .rsvp-form-container {
@@ -1252,6 +1254,16 @@ section.entourage-section {
     
     .rsvp-form-title {
         font-size: 1.5rem;
+    }
+    
+    .gallery-section {
+        padding: 80px 0;
+    }
+    
+    .photo-carousel {
+        margin: 0;
+        max-width: 100%;
+        border-radius: 0;
     }
     
     .carousel-container {
@@ -1440,7 +1452,7 @@ section.entourage-section {
     .calendar-day.wedding-day {
         font-size: 0.95rem;
         transform: scale(1.08);
-        border-width: 2px;
+        border: none;
     }
     
     .rsvp-form-container {
@@ -1452,6 +1464,10 @@ section.entourage-section {
         font-size: 1.3rem;
     }
     
+    .gallery-section {
+        padding: 60px 0;
+    }
+    
     .venue-grid {
         grid-template-columns: 1fr !important;
         gap: 25px;
@@ -1460,6 +1476,12 @@ section.entourage-section {
     .venue-card {
         padding: 30px 20px;
         max-width: 100%;
+    }
+    
+    .photo-carousel {
+        margin: 0;
+        max-width: 100%;
+        border-radius: 0;
     }
     
     .carousel-container {

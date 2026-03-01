@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize EmailJS
 // Get your credentials from https://www.emailjs.com/
-emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
+emailjs.init("vk4GtJc1VVqgKTtMp"); // Replace with your EmailJS Public Key
 
 document.addEventListener('DOMContentLoaded', function() {
     const toggleBtn = document.getElementById('toggleRsvpBtn');
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
             
             // Send email using EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+            emailjs.send('service_ua0hodd', 'template_7oa40pd', {
                 to_email: 'poncejoanjoyd@gmail.com',
                 from_name: formData.fullName,
                 phone: formData.phone,
