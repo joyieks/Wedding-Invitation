@@ -128,10 +128,33 @@ document.addEventListener('DOMContentLoaded', function() {
 // RSVP FORM HANDLING
 // ===========================
 
+// Initialize EmailJS
+// Get your credentials from https://www.emailjs.com/
+emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
+
 document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('toggleRsvpBtn');
+    const formContainer = document.getElementById('rsvpFormContainer');
     const attendanceSelect = document.getElementById('attendance');
     const guestsGroup = document.getElementById('guestsGroup');
     const rsvpForm = document.getElementById('rsvpForm');
+    
+    // Toggle form visibility
+    if (toggleBtn && formContainer) {
+        toggleBtn.addEventListener('click', function() {
+            if (formContainer.style.display === 'none') {
+                formContainer.style.display = 'block';
+                toggleBtn.textContent = 'HIDE FORM';
+                // Smooth scroll to form
+                setTimeout(() => {
+                    formContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            } else {
+                formContainer.style.display = 'none';
+                toggleBtn.textContent = 'RSVP NOW';
+            }
+        });
+    }
     
     // Show/hide guests field based on attendance
     if (attendanceSelect) {
@@ -152,80 +175,110 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get form data
             const formData = {
                 fullName: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
+                phone: document.getElementById('phone').value || 'Not provided',
                 attendance: document.getElementById('attendance').value,
                 guests: document.getElementById('guests').value,
-                dietary: document.getElementById('dietary').value,
-                message: document.getElementById('message').value
+                dietary: document.getElementById('dietary').value || 'None',
+                message: document.getElementById('message').value || 'No message'
             };
             
-            // Here you would typically send the data to a server
-            // For now, we'll just show a success message
-            console.log('RSVP Data:', formData);
+            // Show loading state
+            const submitBtn = rsvpForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
             
-            // Show success message
-            const successMessage = document.createElement('div');
-            successMessage.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: white;
-                padding: 40px;
-                border-radius: 15px;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-                text-align: center;
-                z-index: 9999;
-                max-width: 400px;
-            `;
-            
-            if (formData.attendance === 'yes') {
-                successMessage.innerHTML = `
-                    <h2 style="color: var(--primary-red); font-family: var(--font-heading); margin-bottom: 20px;">
-                        Thank You! 🎉
-                    </h2>
-                    <p style="color: var(--text-dark); line-height: 1.8;">
-                        We're thrilled you'll be joining us on our special day! 
-                        A confirmation email will be sent to <strong>${formData.email}</strong>
-                    </p>
-                    <button onclick="this.parentElement.remove()" style="
-                        margin-top: 20px;
-                        padding: 12px 30px;
-                        background: var(--accent-gold);
-                        color: var(--dark-charcoal);
-                        border: none;
-                        border-radius: 25px;
-                        cursor: pointer;
-                        font-weight: 600;
-                    ">Close</button>
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                to_email: 'poncejoanjoyd@gmail.com',
+                from_name: formData.fullName,
+                phone: formData.phone,
+                attendance: formData.attendance === 'yes' ? 'Joyfully Accept' : 'Regretfully Decline',
+                guests: formData.guests,
+                dietary: formData.dietary,
+                message: formData.message
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Show success message
+                const successMessage = document.createElement('div');
+                successMessage.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: white;
+                    padding: 40px;
+                    border-radius: 15px;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                    text-align: center;
+                    z-index: 9999;
+                    max-width: 400px;
                 `;
-            } else {
-                successMessage.innerHTML = `
-                    <h2 style="color: var(--primary-blue); font-family: var(--font-heading); margin-bottom: 20px;">
-                        We'll Miss You 💙
-                    </h2>
-                    <p style="color: var(--text-dark); line-height: 1.8;">
-                        Thank you for letting us know. We'll miss you on our special day!
-                    </p>
-                    <button onclick="this.parentElement.remove()" style="
-                        margin-top: 20px;
-                        padding: 12px 30px;
-                        background: var(--accent-gold);
-                        color: var(--dark-charcoal);
-                        border: none;
-                        border-radius: 25px;
-                        cursor: pointer;
-                        font-weight: 600;
-                    ">Close</button>
-                `;
-            }
-            
-            document.body.appendChild(successMessage);
-            
-            // Reset form
-            rsvpForm.reset();
-            guestsGroup.style.display = 'none';
+                
+                if (formData.attendance === 'yes') {
+                    successMessage.innerHTML = `
+                        <h2 style="color: var(--primary-red); font-family: var(--font-heading); margin-bottom: 20px;">
+                            Thank You! 🎉
+                        </h2>
+                        <p style="color: var(--text-dark); line-height: 1.8;">
+                            We're thrilled you'll be joining us on our special day! 
+                            Your RSVP has been sent successfully.
+                        </p>
+                        <button onclick="this.parentElement.remove()" style="
+                            margin-top: 20px;
+                            padding: 12px 30px;
+                            background: var(--accent-gold);
+                            color: var(--dark-charcoal);
+                            border: none;
+                            border-radius: 25px;
+                            cursor: pointer;
+                            font-weight: 600;
+                        ">Close</button>
+                    `;
+                } else {
+                    successMessage.innerHTML = `
+                        <h2 style="color: var(--primary-blue); font-family: var(--font-heading); margin-bottom: 20px;">
+                            We'll Miss You 💙
+                        </h2>
+                        <p style="color: var(--text-dark); line-height: 1.8;">
+                            Thank you for letting us know. We'll miss you on our special day!
+                        </p>
+                        <button onclick="this.parentElement.remove()" style="
+                            margin-top: 20px;
+                            padding: 12px 30px;
+                            background: var(--accent-gold);
+                            color: var(--dark-charcoal);
+                            border: none;
+                            border-radius: 25px;
+                            cursor: pointer;
+                            font-weight: 600;
+                        ">Close</button>
+                    `;
+                }
+                
+                document.body.appendChild(successMessage);
+                
+                // Reset form and hide it
+                rsvpForm.reset();
+                guestsGroup.style.display = 'none';
+                formContainer.style.display = 'none';
+                toggleBtn.textContent = 'RSVP NOW';
+            }, function(error) {
+                console.log('FAILED...', error);
+                
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Show error message
+                alert('Sorry, there was an error sending your RSVP. Please try again or contact us directly.');
+            });
         });
     }
 });
@@ -404,47 +457,161 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.scrollTop = 0;
     
     const closedEnvelope = document.getElementById('closedEnvelope');
-    const invitationCard = document.getElementById('invitationCard');
-    const openInvitationBtn = document.getElementById('openInvitation');
     const envelopeOverlay = document.getElementById('envelopeOverlay');
-    const envelopePaper = document.getElementById('envelopePaper');
+    const invitationCard = document.getElementById('invitationCard');
+    const openInvitationBtn = document.getElementById('openInvitationBtn');
+    const envelopeContainer = document.querySelector('.envelope-container');
     
-    // Step 1: Click to open envelope
-    if (closedEnvelope) {
+    // Click envelope to open and show invitation card
+    if (closedEnvelope && invitationCard) {
         closedEnvelope.addEventListener('click', function() {
-            // Add opening animation class (opens flap and shows text)
+            // Add opening class to animate flap
             closedEnvelope.classList.add('opening');
             
-            // Wait 2 seconds after envelope opens, then show invitation card
+            // After flap animation, fade out envelope container and show card
             setTimeout(function() {
-                // Fade out the closed envelope
-                closedEnvelope.style.opacity = '0';
-                closedEnvelope.style.transform = 'scale(0.95)';
-                closedEnvelope.style.transition = 'all 0.6s ease';
+                envelopeContainer.style.opacity = '0';
+                envelopeContainer.style.transition = 'opacity 0.5s ease';
                 
                 setTimeout(function() {
-                    closedEnvelope.style.display = 'none';
-                    invitationCard.classList.remove('hidden');
+                    envelopeContainer.style.display = 'none';
                     
-                    // Show card with animation
+                    // Show invitation card
+                    invitationCard.style.display = 'block';
+                    invitationCard.style.opacity = '0';
                     setTimeout(function() {
-                        invitationCard.classList.add('show');
+                        invitationCard.style.opacity = '1';
                     }, 50);
-                }, 600);
-            }, 2000); // Wait 2 seconds after envelope opens
+                }, 500);
+            }, 1200);
         });
     }
     
-    // Step 2: Click "Open Invitation" to show full page
+    // Click OPEN INVITATION button to reveal main website
     if (openInvitationBtn) {
         openInvitationBtn.addEventListener('click', function() {
             envelopeOverlay.style.opacity = '0';
-            envelopeOverlay.style.transition = 'opacity 0.8s ease';
+            envelopeOverlay.style.transition = 'opacity 1s ease';
             setTimeout(function() {
                 if (envelopeOverlay && envelopeOverlay.parentNode) {
                     envelopeOverlay.parentNode.removeChild(envelopeOverlay);
                 }
-            }, 800);
+            }, 1000);
         });
     }
+});
+
+// ===========================
+// RSVP MODAL - REMOVED
+// ===========================
+
+// RSVP modal functionality has been removed from the website
+
+// ===========================
+// PHOTO CAROUSEL
+// ===========================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.photo-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const prevBtn = carousel.querySelector('.prev-btn');
+    const nextBtn = carousel.querySelector('.next-btn');
+    const dotsContainer = carousel.querySelector('.carousel-dots');
+    
+    let currentSlide = 0;
+    let autoPlayInterval;
+
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('carousel-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = carousel.querySelectorAll('.carousel-dot');
+
+    function updateSlides() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            dots[index].classList.remove('active');
+        });
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlides();
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlides();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlides();
+        resetAutoPlay();
+    }
+
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+
+    function resetAutoPlay() {
+        stopAutoPlay();
+        startAutoPlay();
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoPlay();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoPlay();
+    });
+
+    // Pause on hover, resume on mouse leave
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoPlay();
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoPlay();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+            nextSlide();
+        }
+        if (touchEndX > touchStartX + swipeThreshold) {
+            prevSlide();
+        }
+    }
+
+    // Start autoplay
+    startAutoPlay();
 });

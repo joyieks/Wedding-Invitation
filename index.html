@@ -9,54 +9,63 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Envelope Overlay -->
     <div id="envelopeOverlay" class="envelope-overlay">
         <div class="envelope-container">
-            <!-- Closed Envelope -->
+            <h1 class="envelope-header">WE'RE GETTING MARRIED!</h1>
+            
             <div id="closedEnvelope" class="envelope-wrapper">
-                <div class="envelope">
-                    <div class="envelope-back">
-                        <!-- Text inside white envelope area -->
-                        <div class="envelope-text">
-                            <div class="envelope-invite">You are invited</div>
-                            <div class="envelope-subtitle">ARE GETTING MARRIED</div>
-                            <div class="envelope-date">May 18, 2026</div>
-                        </div>
-                    </div>
-                    <div class="envelope-front"></div>
-                    <div class="envelope-flap">
-                        <!-- S&P Logo on green flap -->
-                        <div class="flap-logo script-font">S & P</div>
-                    </div>
-                    <div class="envelope-seal">
-                        <div class="seal-icon">❤</div>
-                    </div>
-                    <div class="floral-decoration top-left"></div>
-                    <div class="floral-decoration top-right"></div>
-                    <div class="floral-decoration bottom-left"></div>
-                    <div class="floral-decoration bottom-right"></div>
-                </div>
-                <p class="envelope-instruction">Click to open</p>
-            </div>
+                <div class="envelope-graphic envelope-v2">
+                    <!-- Back rectangle -->
+                    <div class="env-back"></div>
 
-            <!-- Invitation Card (hidden initially) -->
-            <div id="invitationCard" class="invitation-card hidden">
-                <div class="card-content">
-                    <div class="card-frame">
-                        <div class="couple-photo">
-                            <img src="imgs/mainpictita.png" alt="Sharon & Perry" onerror="this.src='imgs/tita1.jpg'">
-                        </div>
-                        <h1 class="couple-names script-font">Sharon & Perry</h1>
-                        <div class="wedding-text">
-                            <p class="getting-married">ARE GETTING MARRIED</p>
-                        </div>
-                        <div class="card-date">May 18, 2026</div>
-                        <button id="openInvitation" class="btn-open-invitation">Open Invitation</button>
+                    <!-- Side folds -->
+                    <div class="env-left"></div>
+                    <div class="env-right"></div>
+
+                    <!-- Bottom/front fold -->
+                    <div class="env-front"></div>
+
+                    <!-- Top flap (CLOSED / points down) -->
+                    <div class="env-flap"></div>
+
+                    <!-- Seal -->
+                    <div class="env-seal" aria-hidden="true">
+                        <div class="env-seal-inner"></div>
                     </div>
+
+                    <!-- Click text -->
+                    <div class="env-click">click here</div>
                 </div>
             </div>
+            
+            <h2 class="envelope-names script-font">Sharon & Perry</h2>
+        </div>
+
+        <!-- Invitation Card (shown after envelope opens) -->
+        <div id="invitationCard" class="invitation-card" style="display: none;">
+            <div class="card-decorations">
+                <span class="card-dot dot-1"></span>
+                <span class="card-dot dot-2"></span>
+                <span class="card-dot dot-3"></span>
+                <span class="card-dot dot-4"></span>
+            </div>
+            
+            <div class="card-photo-frame">
+                <img src="imgs/mainpictita.png" alt="Sharon & Perry" class="card-photo">
+            </div>
+            
+            <h2 class="card-names script-font">Sharon & Perry</h2>
+            
+            <p class="card-announcement">ARE GETTING MARRIED</p>
+            
+            <p class="card-date">May 18, 2026</p>
+            
+            <button id="openInvitationBtn" class="open-invitation-btn">OPEN INVITATION</button>
         </div>
     </div>
 
@@ -77,14 +86,7 @@
         <div class="hero-content">
             <div class="ornament-divider top"></div>
             <h1 class="script-font">Sharon & Perry</h1>
-            <div class="ornament-line"></div>
-            <p class="wedding-announce">You are invited to celebrate our special day.<br>The presence of you and your family would be an honor to us.<br>Please click the button below to confirm your attendance.</p>
-            <div class="wedding-date">
-                <p class="date-text">May 18, 2026</p>
-                <p class="time-text">4:00 PM</p>
-            </div>
             <div class="ornament-divider bottom"></div>
-            <a href="#rsvp" class="btn-rsvp">RSVP NOW</a>
         </div>
     </section>
 
@@ -109,6 +111,62 @@
                 <div class="countdown-item">
                     <span class="countdown-value" id="seconds">00</span>
                     <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+
+            <!-- Wedding Calendar -->
+            <div class="wedding-calendar">
+                <div class="calendar-header">
+                    <h3>May 2026</h3>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-day-label">Sun</div>
+                    <div class="calendar-day-label">Mon</div>
+                    <div class="calendar-day-label">Tue</div>
+                    <div class="calendar-day-label">Wed</div>
+                    <div class="calendar-day-label">Thu</div>
+                    <div class="calendar-day-label">Fri</div>
+                    <div class="calendar-day-label">Sat</div>
+                    
+                    <!-- Empty cells for days before May 1 (May 1, 2026 is a Friday) -->
+                    <div class="calendar-day empty"></div>
+                    <div class="calendar-day empty"></div>
+                    <div class="calendar-day empty"></div>
+                    <div class="calendar-day empty"></div>
+                    <div class="calendar-day empty"></div>
+                    
+                    <!-- May days -->
+                    <div class="calendar-day">1</div>
+                    <div class="calendar-day">2</div>
+                    <div class="calendar-day">3</div>
+                    <div class="calendar-day">4</div>
+                    <div class="calendar-day">5</div>
+                    <div class="calendar-day">6</div>
+                    <div class="calendar-day">7</div>
+                    <div class="calendar-day">8</div>
+                    <div class="calendar-day">9</div>
+                    <div class="calendar-day">10</div>
+                    <div class="calendar-day">11</div>
+                    <div class="calendar-day">12</div>
+                    <div class="calendar-day">13</div>
+                    <div class="calendar-day">14</div>
+                    <div class="calendar-day">15</div>
+                    <div class="calendar-day">16</div>
+                    <div class="calendar-day">17</div>
+                    <div class="calendar-day wedding-day">18</div>
+                    <div class="calendar-day">19</div>
+                    <div class="calendar-day">20</div>
+                    <div class="calendar-day">21</div>
+                    <div class="calendar-day">22</div>
+                    <div class="calendar-day">23</div>
+                    <div class="calendar-day">24</div>
+                    <div class="calendar-day">25</div>
+                    <div class="calendar-day">26</div>
+                    <div class="calendar-day">27</div>
+                    <div class="calendar-day">28</div>
+                    <div class="calendar-day">29</div>
+                    <div class="calendar-day">30</div>
+                    <div class="calendar-day">31</div>
                 </div>
             </div>
         </div>
@@ -136,6 +194,34 @@
         <div class="container">
             <h2 class="section-title">Sharon & Perry Photos</h2>
             <div class="ornament-divider-small"></div>
+            
+            <!-- Photo Carousel -->
+            <div class="photo-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="imgs/tita1.jpg" alt="Sharon and Perry - Photo 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="imgs/tita2.jpg" alt="Sharon and Perry - Photo 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="imgs/tita3.jpg" alt="Sharon and Perry - Photo 3">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="imgs/tita4.jpg" alt="Sharon and Perry - Photo 4">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="imgs/tita5.jpg" alt="Sharon and Perry - Photo 5">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="imgs/tita1.jpg" alt="Sharon and Perry - Photo 6">
+                    </div>
+                </div>
+                <button class="carousel-btn prev-btn">❮</button>
+                <button class="carousel-btn next-btn">❯</button>
+                <div class="carousel-dots"></div>
+            </div>
+
             <div class="gallery-grid">
                 <div class="gallery-item">
                     <img src="imgs/tita1.jpg" alt="Sharon and Perry - Photo 1">
@@ -178,14 +264,12 @@
                     <div class="venue-divider"></div>
                     <h4>Holy Family Church Parish</h4>
                     <p class="venue-time">4:00 PM</p>
-                    <p class="venue-address">2GR3+34Q, Talomo<br>Davao City, Davao del Sur</p>
-                    <div class="map-container">
-                        <!-- Church location map -->
-                        <iframe width="100%" height="250" frameborder="0" style="border:0" 
-                            src="https://www.google.com/maps?q=7.040299878729544,125.50307862111984&output=embed" 
-                            allowfullscreen>
-                        </iframe>
+                    <div class="venue-image-container">
+                        <img src="imgs/church.jpg" alt="Holy Family Church Parish" class="venue-image">
                     </div>
+                    <a href="https://www.google.com/maps?q=7.040299878729544,125.50307862111984" target="_blank" class="btn-view-map">
+                        <span>📍</span> View Map
+                    </a>
                 </div>
 
                 <!-- Reception -->
@@ -194,14 +278,12 @@
                     <div class="venue-divider"></div>
                     <h4>Villa Carmelita Inland Resort and Hotel</h4>
                     <p class="venue-time">6:00 PM</p>
-                    <p class="venue-address">2GF3+XW9, 14 MacArthur Highway<br>De Guzman St, Toril, Davao City, 8000 Davao del Sur</p>
-                    <div class="map-container">
-                        <!-- Reception location map -->
-                        <iframe width="100%" height="250" frameborder="0" style="border:0" 
-                            src="https://www.google.com/maps?q=2GF3+XW9,+14+MacArthur+Highway,+Toril,+Davao+City&output=embed" 
-                            allowfullscreen>
-                        </iframe>
+                    <div class="venue-image-container">
+                        <img src="imgs/recep.jpg" alt="Villa Carmelita Inland Resort and Hotel" class="venue-image">
                     </div>
+                    <a href="https://www.google.com/maps?q=2GF3+XW9,+14+MacArthur+Highway,+Toril,+Davao+City" target="_blank" class="btn-view-map">
+                        <span>📍</span> View Map
+                    </a>
                 </div>
             </div>
         </div>
@@ -838,6 +920,64 @@
         </div>
     </section>
 
+    <!-- Invitation Message Section -->
+    <section class="invitation-message-section">
+        <div class="container">
+            <div class="invitation-message-content">
+                <div class="ornament-line"></div>
+                <p class="wedding-announce">You are invited to celebrate our special day.<br>The presence of you and your family would be an honor to us.</p>
+                <div class="wedding-date">
+                    <p class="date-text">May 18, 2026</p>
+                    <p class="time-text">4:00 PM</p>
+                </div>
+                <div class="ornament-line"></div>
+                <button id="toggleRsvpBtn" class="btn-rsvp">RSVP NOW</button>
+                
+                <!-- RSVP Form (Hidden by default) -->
+                <div id="rsvpFormContainer" class="rsvp-form-container" style="display: none;">
+                    <h3 class="rsvp-form-title">Please Confirm Your Attendance</h3>
+                    <form class="rsvp-form" id="rsvpForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="attendance">Will you be attending? *</label>
+                            <select id="attendance" name="attendance" required>
+                                <option value="">Please select</option>
+                                <option value="yes">Joyfully Accept</option>
+                                <option value="no">Regretfully Decline</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="guestsGroup" style="display: none;">
+                            <label for="guests">Number of Guests</label>
+                            <input type="number" id="guests" name="guests" min="1" max="5" value="1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dietary">Dietary Restrictions or Allergies</label>
+                            <textarea id="dietary" name="dietary" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Special Message for the Couple</label>
+                            <textarea id="message" name="message" rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Submit RSVP</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ Section -->
     <section class="faq-section">
         <div class="container">
@@ -928,66 +1068,10 @@
         </div>
     </section>
 
-    <!-- RSVP Section -->
-    <section class="rsvp-section" id="rsvp">
-        <div class="container">
-            <h2 class="section-title">RSVP</h2>
-            <div class="ornament-divider-small"></div>
-            <p class="section-subtitle">We would be honored by your presence</p>
-            
-            <form class="rsvp-form" id="rsvpForm">
-                <div class="form-group">
-                    <label for="fullName">Full Name *</label>
-                    <input type="text" id="fullName" name="fullName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-                
-                <div class="form-group">
-                    <label for="attendance">Will you be attending? *</label>
-                    <select id="attendance" name="attendance" required>
-                        <option value="">Please select</option>
-                        <option value="yes">Joyfully Accept</option>
-                        <option value="no">Regretfully Decline</option>
-                    </select>
-                </div>
-                
-                <div class="form-group" id="guestsGroup" style="display: none;">
-                    <label for="guests">Number of Guests</label>
-                    <input type="number" id="guests" name="guests" min="1" max="5" value="1">
-                </div>
-                
-                <div class="form-group">
-                    <label for="dietary">Dietary Restrictions or Allergies</label>
-                    <textarea id="dietary" name="dietary" rows="3"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Special Message for the Couple</label>
-                    <textarea id="message" name="message" rows="4"></textarea>
-                </div>
-                
-                <button type="submit" class="btn-submit">Submit RSVP</button>
-            </form>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-divider"></div>
-            <p class="footer-text script-font">Sharon & Perry</p>
-            <p class="footer-date">May 18, 2026</p>
-            <p class="footer-tagline">Two hearts, one love, forever united</p>
-            <div class="footer-ornament">❦</div>
         </div>
     </footer>
 
