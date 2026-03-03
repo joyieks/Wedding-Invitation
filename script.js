@@ -205,64 +205,56 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 
-                // Show success message
+                // Show success message with overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'rsvp-success-overlay';
+                
                 const successMessage = document.createElement('div');
-                successMessage.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: white;
-                    padding: 40px;
-                    border-radius: 15px;
-                    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-                    text-align: center;
-                    z-index: 9999;
-                    max-width: 400px;
-                `;
+                successMessage.className = 'rsvp-success-message';
                 
                 if (formData.attendance === 'yes') {
                     successMessage.innerHTML = `
-                        <h2 style="color: var(--primary-red); font-family: var(--font-heading); margin-bottom: 20px;">
-                            Thank You! 🎉
-                        </h2>
-                        <p style="color: var(--text-dark); line-height: 1.8;">
+                        <div class="success-icon">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                <circle cx="30" cy="30" r="28" stroke="#DAA520" stroke-width="3" fill="white"/>
+                                <path d="M18 30L26 38L42 22" stroke="#2C5F2D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h2 class="success-title">Thank You!</h2>
+                        <p class="success-text">
                             We're thrilled you'll be joining us on our special day! 
-                            Your RSVP has been sent successfully.
+                            Your RSVP has been confirmed.
                         </p>
-                        <button onclick="this.parentElement.remove()" style="
-                            margin-top: 20px;
-                            padding: 12px 30px;
-                            background: var(--accent-gold);
-                            color: var(--dark-charcoal);
-                            border: none;
-                            border-radius: 25px;
-                            cursor: pointer;
-                            font-weight: 600;
-                        ">Close</button>
+                        <button onclick="document.querySelector('.rsvp-success-overlay').remove()" class="success-close-btn">
+                            Close
+                        </button>
                     `;
                 } else {
                     successMessage.innerHTML = `
-                        <h2 style="color: var(--primary-blue); font-family: var(--font-heading); margin-bottom: 20px;">
-                            We'll Miss You 💙
-                        </h2>
-                        <p style="color: var(--text-dark); line-height: 1.8;">
-                            Thank you for letting us know. We'll miss you on our special day!
+                        <div class="success-icon">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                <circle cx="30" cy="30" r="28" stroke="#DAA520" stroke-width="3" fill="white"/>
+                                <path d="M30 20V32" stroke="#1a3a52" stroke-width="4" stroke-linecap="round"/>
+                                <circle cx="30" cy="40" r="2" fill="#1a3a52"/>
+                            </svg>
+                        </div>
+                        <h2 class="success-title">We'll Miss You</h2>
+                        <p class="success-text">
+                            Thank you for letting us know. We appreciate your response!
                         </p>
-                        <button onclick="this.parentElement.remove()" style="
-                            margin-top: 20px;
-                            padding: 12px 30px;
-                            background: var(--accent-gold);
-                            color: var(--dark-charcoal);
-                            border: none;
-                            border-radius: 25px;
-                            cursor: pointer;
-                            font-weight: 600;
-                        ">Close</button>
+                        <button onclick="document.querySelector('.rsvp-success-overlay').remove()" class="success-close-btn">
+                            Close
+                        </button>
                     `;
                 }
                 
-                document.body.appendChild(successMessage);
+                overlay.appendChild(successMessage);
+                document.body.appendChild(overlay);
+                
+                // Trigger animation
+                setTimeout(() => {
+                    overlay.classList.add('show');
+                }, 10);
                 
                 // Reset form and hide it
                 rsvpForm.reset();

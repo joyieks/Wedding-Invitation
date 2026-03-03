@@ -2034,6 +2034,105 @@ section.entourage-section {
 }
 
 /* ===========================
+   RSVP SUCCESS MESSAGE
+   =========================== */
+
+.rsvp-success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.rsvp-success-overlay.show {
+    opacity: 1;
+}
+
+.rsvp-success-message {
+    background: white;
+    padding: 45px 40px;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    border: 3px solid var(--accent-gold);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.rsvp-success-overlay.show .rsvp-success-message {
+    transform: scale(1);
+}
+
+.success-icon {
+    margin: 0 auto 25px;
+    animation: successPop 0.6s ease 0.2s both;
+}
+
+@keyframes successPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.success-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--primary-blue);
+    margin-bottom: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.success-text {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.success-close-btn {
+    padding: 14px 40px;
+    background: linear-gradient(135deg, var(--accent-gold) 0%, #c99a1f 100%);
+    color: var(--dark-charcoal);
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+}
+
+.success-close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(218, 165, 32, 0.6);
+    background: linear-gradient(135deg, #c99a1f 0%, var(--accent-gold) 100%);
+}
+
+/* ===========================
    FOOTER
    =========================== */
 
@@ -2433,6 +2532,31 @@ section.entourage-section {
         padding: 14px;
         font-size: 0.95rem;
         letter-spacing: 1.5px;
+    }
+    
+    .rsvp-success-message {
+        padding: 35px 25px;
+        max-width: 90%;
+    }
+    
+    .success-icon svg {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .success-title {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+    
+    .success-text {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+    
+    .success-close-btn {
+        padding: 12px 32px;
+        font-size: 0.9rem;
     }
     
     .footer-text {
@@ -2886,6 +3010,41 @@ section.entourage-section {
         font-size: 0.85rem;
         letter-spacing: 1px;
         margin-top: 10px;
+    }
+    
+    .rsvp-success-overlay {
+        padding: 15px;
+    }
+    
+    .rsvp-success-message {
+        padding: 30px 20px;
+        max-width: 95%;
+        border-width: 2px;
+    }
+    
+    .success-icon {
+        margin-bottom: 20px;
+    }
+    
+    .success-icon svg {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .success-title {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+    }
+    
+    .success-text {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+    
+    .success-close-btn {
+        padding: 11px 28px;
+        font-size: 0.85rem;
     }
     
     .dresscode-section {
