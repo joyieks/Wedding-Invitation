@@ -456,6 +456,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     
+    // Prevent body scrolling while envelope is visible
+    document.body.classList.add('envelope-active');
+    
     const closedEnvelope = document.getElementById('closedEnvelope');
     const envelopeOverlay = document.getElementById('envelopeOverlay');
     const invitationCard = document.getElementById('invitationCard');
@@ -495,6 +498,8 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 if (envelopeOverlay && envelopeOverlay.parentNode) {
                     envelopeOverlay.parentNode.removeChild(envelopeOverlay);
+                    // Restore body scrolling
+                    document.body.classList.remove('envelope-active');
                 }
             }, 1000);
         });
@@ -614,4 +619,239 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Start autoplay
     startAutoPlay();
+});
+
+// ===========================
+// ENTOURAGE SHOW MORE/LESS
+// ===========================
+
+function toggleEntourage(sectionId, button) {
+    const section = document.getElementById(sectionId);
+    const icon = button.querySelector('.toggle-icon');
+    
+    if (section.style.display === 'none' || section.style.display === '') {
+        section.style.display = 'contents';
+        button.innerHTML = 'Show Less <span class="toggle-icon">▲</span>';
+    } else {
+        section.style.display = 'none';
+        button.innerHTML = 'Show More <span class="toggle-icon">▼</span>';
+        // Scroll to the category heading
+        button.closest('.entourage-category').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+}
+
+// ===========================
+// ATTIRE SEARCH FUNCTIONALITY
+// ===========================
+
+function searchAttire() {
+    const searchInput = document.getElementById('attireSearch').value.trim();
+    const searchResult = document.getElementById('searchResult');
+    
+    if (!searchInput) {
+        searchResult.textContent = 'Please enter your name.';
+        searchResult.style.color = '#dc3545';
+        return;
+    }
+    
+    // Get all entourage members
+    const allMembers = document.querySelectorAll('.entourage-member');
+    let foundMember = null;
+    let memberCategory = '';
+    let colorClass = '';
+    
+    // Search through all members
+    allMembers.forEach(member => {
+        const memberName = member.querySelector('.member-name');
+        if (memberName && memberName.textContent.toLowerCase().includes(searchInput.toLowerCase())) {
+            foundMember = member;
+            
+            // Determine category based on closest entourage-category
+            const category = member.closest('.entourage-category');
+            if (category) {
+                const categoryTitle = category.querySelector('h3').textContent;
+                memberCategory = categoryTitle;
+            }
+            
+            // Get color class
+            if (member.classList.contains('color-indicator-red')) {
+                colorClass = 'red';
+            } else if (member.classList.contains('color-indicator-green')) {
+                colorClass = 'green';
+            } else if (member.classList.contains('color-indicator-skyblue')) {
+                colorClass = 'blue';
+            }
+        }
+    });
+    
+    if (foundMember) {
+        searchResult.textContent = 'Found! Opening your attire guide...';
+        searchResult.style.color = '#28a745';
+        
+        // Determine which image and instructions to show
+        showAttireModal(memberCategory, colorClass, searchInput);
+    } else {
+        searchResult.textContent = 'Name not found in the entourage list. Please check spelling or contact the couple.';
+        searchResult.style.color = '#dc3545';
+    }
+}
+
+function showAttireModal(category, colorClass, name) {
+    const modal = document.getElementById('attireModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const modalImage = document.getElementById('modalImage');
+    const modalInstructions = document.getElementById('modalInstructions');
+    
+    let imagePath = '';
+    let instructions = '';
+    let title = '';
+    let subtitle = '';
+    
+    // Helper function to create attire item HTML
+    function createAttireItem(label, value) {
+        return `<div class="attire-item"><span class="attire-label">${label}:</span><span class="attire-value">${value}</span></div>`;
+    }
+    
+    // Check if Principal Sponsor
+    if (category.includes('Principal Sponsors') || category.includes('Secondary Sponsors')) {
+        imagePath = 'imgs/outfits/sponsors.png';
+        title = 'Principal Sponsors';
+        
+        // Determine if male or female based on title
+        if (name.toLowerCase().includes('mr.') || name.toLowerCase().includes('atty.')) {
+            subtitle = 'Gentlemen Sponsors';
+            instructions = createAttireItem('Suit', 'Black formal suit') +
+                          createAttireItem('Shirt', 'White formal dress shirt') +
+                          createAttireItem('Necktie', 'Plain black necktie') +
+                          createAttireItem('Shoes', 'Black formal shoes');
+        } else {
+            subtitle = 'Ladies Sponsors';
+            instructions = createAttireItem('Attire', 'Cream or ivory formal gown') +
+                          createAttireItem('Style', 'Elegant formal wear');
+        }
+    }
+    // Check if Bridesmaids & Groomsmen
+    else if (category.includes('Bridesmaids') || category.includes('Wedding Party')) {
+        // Determine if male or female
+        const isMale = name.toLowerCase().includes('mr.');
+        
+        if (isMale) {
+            // Show groomsmen attire based on color
+            if (colorClass === 'red') {
+                imagePath = 'imgs/outfits/redbridesmaid.png';
+                title = 'Groomsmen / Escort';
+                subtitle = 'Red Group';
+                instructions = createAttireItem('Suit', 'Black formal suit') +
+                              createAttireItem('Shirt', 'White formal dress shirt') +
+                              createAttireItem('Necktie', 'Scottish Red tartan necktie') +
+                              createAttireItem('Shoes', 'Black formal shoes') +
+                              '<div class="attire-note">Your necktie matches your paired bridesmaid\'s red gown.</div>';
+            } else if (colorClass === 'green') {
+                imagePath = 'imgs/outfits/greenbridesmaid.png';
+                title = 'Groomsmen / Escort';
+                subtitle = 'Green Group';
+                instructions = createAttireItem('Suit', 'Black formal suit') +
+                              createAttireItem('Shirt', 'White formal dress shirt') +
+                              createAttireItem('Necktie', 'Scottish Green tartan necktie') +
+                              createAttireItem('Shoes', 'Black formal shoes') +
+                              '<div class="attire-note">Your necktie matches your paired bridesmaid\'s green gown.</div>';
+            } else if (colorClass === 'blue') {
+                imagePath = 'imgs/outfits/bluebridesmaid.png';
+                title = 'Groomsmen / Escort';
+                subtitle = 'Powder Blue Group';
+                instructions = createAttireItem('Suit', 'Black formal suit') +
+                              createAttireItem('Shirt', 'White formal dress shirt') +
+                              createAttireItem('Necktie', 'Scottish Blue tartan necktie') +
+                              createAttireItem('Shoes', 'Black formal shoes') +
+                              '<div class="attire-note">Your necktie matches your paired bridesmaid\'s powder blue gown.</div>';
+            }
+        } else {
+            // Show bridesmaid attire based on color
+            if (colorClass === 'red') {
+                imagePath = 'imgs/outfits/redbridesmaid.png';
+                title = 'Bridesmaid';
+                subtitle = 'Red Group';
+                instructions = createAttireItem('Attire', 'Red formal gown') +
+                              createAttireItem('Style', 'Elegant floor-length or tea-length formal wear') +
+                              '<div class="attire-note">Your gown color matches your paired groomsman\'s Scottish Red tartan necktie.</div>';
+            } else if (colorClass === 'green') {
+                imagePath = 'imgs/outfits/greenbridesmaid.png';
+                title = 'Bridesmaid';
+                subtitle = 'Green Group';
+                instructions = createAttireItem('Attire', 'Green formal gown') +
+                              createAttireItem('Style', 'Elegant floor-length or tea-length formal wear') +
+                              '<div class="attire-note">Your gown color matches your paired groomsman\'s Scottish Green tartan necktie.</div>';
+            } else if (colorClass === 'blue') {
+                imagePath = 'imgs/outfits/bluebridesmaid.png';
+                title = 'Bridesmaid';
+                subtitle = 'Powder Blue Group';
+                instructions = createAttireItem('Attire', 'Powder blue formal gown') +
+                              createAttireItem('Style', 'Elegant floor-length or tea-length formal wear') +
+                              '<div class="attire-note">Your gown color matches your paired groomsman\'s Scottish Blue tartan necktie.</div>';
+            }
+        }
+    }
+    // Matron of Honor
+    else if (category.includes('Matron of Honor')) {
+        imagePath = 'imgs/outfits/outfittogether.png';
+        title = 'Matron of Honor';
+        subtitle = '';
+        instructions = createAttireItem('Attire', 'Elegant formal gown') +
+                      createAttireItem('Style', 'Coordinate with the bridal party theme') +
+                      createAttireItem('Color', 'To be confirmed with the bride') +
+                      '<div class="attire-note">Please contact Sharon for specific color and style preferences.</div>';
+    }
+    // Best Man
+    else if (category.includes('Best Man')) {
+        imagePath = 'imgs/outfits/outfittogether.png';
+        title = 'Best Man';
+        subtitle = '';
+        instructions = createAttireItem('Suit', 'Black formal suit') +
+                      createAttireItem('Shirt', 'White formal dress shirt') +
+                      createAttireItem('Necktie', 'Scottish tartan necktie') +
+                      createAttireItem('Shoes', 'Black formal shoes') +
+                      '<div class="attire-note">Please contact Perry for specific necktie color/pattern.</div>';
+    }
+    // Other roles (Priest, Flower Girls, Ring Bearer, etc.)
+    else {
+        imagePath = 'imgs/outfits/outfittogether.png';
+        title = 'Wedding Party';
+        subtitle = '';
+        instructions = '<div class="attire-note">Please refer to the general attire guidelines or contact the couple for specific instructions.</div>';
+    }
+    
+    // Set modal content
+    modalTitle.textContent = title;
+    modalSubtitle.textContent = subtitle;
+    modalImage.src = imagePath;
+    modalInstructions.innerHTML = instructions;
+    
+    // Show modal
+    modal.style.display = 'block';
+}
+
+function closeAttireModal() {
+    const modal = document.getElementById('attireModal');
+    modal.style.display = 'none';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('attireModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Allow Enter key to search
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('attireSearch');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                searchAttire();
+            }
+        });
+    }
 });
