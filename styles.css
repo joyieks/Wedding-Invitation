@@ -1388,6 +1388,456 @@ section.entourage-section {
 }
 
 /* ===========================
+   ENTOURAGE CARD GRID
+   =========================== */
+
+.entourage-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 20px 0;
+}
+
+.entourage-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    border: 2px solid #e8e8e8;
+    border-radius: 15px;
+    padding: 40px 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.entourage-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold), var(--primary-red));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.entourage-card:hover::before {
+    transform: scaleX(1);
+}
+
+.entourage-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--accent-gold);
+    box-shadow: 0 15px 40px rgba(26, 58, 82, 0.15);
+}
+
+.entourage-card .card-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease;
+}
+
+.entourage-card .card-icon svg {
+    width: 100%;
+    height: 100%;
+    color: var(--primary-blue);
+    transition: color 0.3s ease;
+}
+
+.entourage-card:hover .card-icon {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.entourage-card:hover .card-icon svg {
+    color: var(--accent-gold);
+}
+
+.entourage-card .card-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+    margin: 15px 0 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.entourage-card .card-count {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin: 10px 0;
+    letter-spacing: 0.5px;
+}
+
+.entourage-card .card-hover-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--accent-gold);
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.entourage-card:hover .card-hover-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================
+   ENTOURAGE MODAL
+   =========================== */
+
+.entourage-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: fadeIn 0.3s ease;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.entourage-modal-content {
+    background: linear-gradient(to bottom, #fafafa 0%, #ffffff 50%, #fafafa 100%);
+    margin: 2% auto;
+    padding: 0;
+    border-radius: 12px;
+    max-width: 900px;
+    width: 92%;
+    position: relative;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid var(--accent-gold);
+    animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Decorative corner ornaments */
+.entourage-modal-content::before,
+.entourage-modal-content::after {
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border: 2.5px solid var(--accent-gold);
+    z-index: 1;
+}
+
+.entourage-modal-content::before {
+    top: 12px;
+    left: 12px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.entourage-modal-content::after {
+    top: 12px;
+    right: 12px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.entourage-modal-close {
+    color: var(--text-light);
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 36px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    line-height: 1;
+}
+
+.entourage-modal-close:hover {
+    color: white;
+    background: var(--primary-red);
+    transform: rotate(90deg);
+}
+
+.entourage-modal .modal-header {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #2a4f6d 100%);
+    padding: 35px 50px 30px;
+    text-align: center;
+    position: relative;
+    border-bottom: 3px solid var(--accent-gold);
+}
+
+.entourage-modal .modal-header::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: var(--primary-red);
+}
+
+.entourage-modal .modal-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: white;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.entourage-modal .modal-subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+    margin-top: 10px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+.entourage-modal .modal-body {
+    padding: 40px 30px;
+    overflow-y: auto;
+    max-height: calc(90vh - 180px);
+    background: white;
+}
+
+/* Custom scrollbar for entourage modal */
+.entourage-modal .modal-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+.entourage-modal .modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.entourage-modal .modal-body::-webkit-scrollbar-thumb {
+    background: var(--accent-gold);
+    border-radius: 5px;
+}
+
+.entourage-modal .modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-blue);
+}
+
+.modal-members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 10px;
+    justify-items: center;
+}
+
+/* Center single member */
+.modal-members-grid:has(.modal-member-card:only-child) {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Paired Layout */
+.modal-pairs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.modal-pair-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    background: #fafafa;
+    border-radius: 12px;
+    border: 2px solid #e8e8e8;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.modal-pair-row.single-member {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.modal-pair-row:hover {
+    background: #f5f5f5;
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Color indicators for bridesmaid groups */
+.modal-pair-row.group-red {
+    border-left: 5px solid #dc3545;
+}
+
+.modal-pair-row.group-green {
+    border-left: 5px solid #28a745;
+}
+
+.modal-pair-row.group-blue {
+    border-left: 5px solid #17a2b8;
+}
+
+/* Add decorative line between pairs */
+.modal-pair-row::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, var(--accent-gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.modal-pair-row:hover::before {
+    opacity: 0.4;
+}
+
+.modal-pair-row.single-member::before {
+    display: none;
+}
+
+.modal-member-card {
+    background: white;
+    border: 2px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.modal-member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-gold);
+}
+
+/* Single member card styling */
+.modal-members-grid .modal-member-card:only-child {
+    max-width: 280px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.modal-members-grid .modal-member-card:only-child:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.modal-member-card.pair-male {
+    border-left: 4px solid var(--primary-blue);
+    position: relative;
+}
+
+.modal-member-card.pair-male::after {
+    content: '♂';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 1rem;
+    color: var(--primary-blue);
+    opacity: 0.3;
+}
+
+.modal-member-card.pair-female {
+    border-left: 4px solid var(--primary-red);
+    position: relative;
+}
+
+.modal-member-card.pair-female::after {
+    content: '♀';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 1rem;
+    color: var(--primary-red);
+    opacity: 0.3;
+}
+
+.modal-member-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    border-color: var(--accent-gold);
+}
+
+.modal-member-card.red-group {
+    border-top: 3px solid #dc3545;
+}
+
+.modal-member-card.green-group {
+    border-top: 3px solid #28a745;
+}
+
+.modal-member-card.blue-group {
+    border-top: 3px solid #17a2b8;
+}
+
+.modal-member-photo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #f0f0f0;
+    transition: border-color 0.3s ease;
+}
+
+.modal-member-card:hover .modal-member-photo {
+    border-color: var(--accent-gold);
+}
+
+.modal-member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-member-name {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* ===========================
    DRESS CODE SECTION
    =========================== */
 
@@ -2426,7 +2876,7 @@ section.entourage-section {
     }
     
     .itinerary-paper {
-        padding: 40px 30px;
+        padding: 40px 25px;
         margin-top: 30px;
     }
     
@@ -2442,19 +2892,33 @@ section.entourage-section {
     }
     
     .itinerary-date {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        letter-spacing: 1.5px;
     }
     
     .itinerary-row {
-        padding: 15px 0;
+        padding: 14px 0;
+        flex-wrap: wrap;
+        gap: 8px;
     }
     
     .itinerary-event {
-        font-size: 1.15rem;
+        font-size: 1rem;
+        white-space: normal;
+        word-wrap: break-word;
+        flex: 1 1 auto;
+        min-width: 0;
     }
     
     .itinerary-time {
-        font-size: 1.05rem;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .itinerary-dots {
+        flex: 1 1 40px;
+        min-width: 20px;
     }
     
     .entourage-grid {
@@ -2505,6 +2969,118 @@ section.entourage-section {
     .entourage-show-more-btn {
         padding: 10px 30px;
         font-size: 0.9rem;
+    }
+    
+    /* Entourage Card Grid - Responsive */
+    .entourage-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin: 30px auto 0;
+        padding: 10px;
+    }
+    
+    .entourage-card {
+        padding: 30px 20px;
+    }
+    
+    .entourage-card .card-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 18px;
+    }
+    
+    .entourage-card .card-title {
+        font-size: 1.25rem;
+    }
+    
+    .entourage-card .card-count {
+        font-size: 0.9rem;
+    }
+    
+    /* Entourage Modal - Responsive */
+    .entourage-modal-content {
+        width: 95%;
+        margin: 5% auto;
+        max-height: 85vh;
+    }
+    
+    .entourage-modal .modal-header {
+        padding: 25px 30px 20px;
+    }
+    
+    .entourage-modal .modal-title {
+        font-size: 1.5rem;
+    }
+    
+    .entourage-modal .modal-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .entourage-modal .modal-body {
+        padding: 25px 15px;
+    }
+    
+    .modal-members-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
+    
+    .modal-members-grid:has(.modal-member-card:only-child) {
+        max-width: 220px;
+    }
+    
+    .modal-members-grid .modal-member-card:only-child {
+        max-width: 220px;
+    }
+    
+    .modal-pairs-container {
+        gap: 15px;
+    }
+    
+    .modal-pair-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 15px 10px;
+    }
+    
+    .modal-pair-row::before {
+        display: block;
+        height: 35%;
+    }
+    
+    .modal-pair-row.single-member {
+        max-width: 200px;
+    }
+    
+    .modal-member-card {
+        padding: 15px 10px;
+    }
+    
+    .modal-member-photo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 12px;
+    }
+    
+    .modal-member-name {
+        font-size: 0.95rem;
+        line-height: 1.3;
+    }
+    
+    .modal-member-card.pair-male::after,
+    .modal-member-card.pair-female::after {
+        font-size: 0.9rem;
+        top: 6px;
+        right: 6px;
+    }
+    
+    .modal-member-photo {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .modal-member-name {
+        font-size: 0.95rem;
     }
     
     .rsvp-form {
@@ -2873,7 +3449,7 @@ section.entourage-section {
     }
     
     .itinerary-paper {
-        padding: 30px 20px;
+        padding: 25px 15px;
         margin-top: 20px;
     }
     
@@ -2885,50 +3461,76 @@ section.entourage-section {
     }
     
     .itinerary-monogram {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
     
     .itinerary-date {
-        font-size: 1rem;
+        font-size: 0.9rem;
         letter-spacing: 1px;
     }
     
     .itinerary-header {
-        margin-bottom: 30px;
-        padding-bottom: 20px;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
     }
     
     .itinerary-row {
-        padding: 12px 0;
-        flex-wrap: wrap;
-        gap: 5px;
+        padding: 12px 5px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    
+    .itinerary-row:hover {
+        padding-left: 10px;
+        margin: 0 -5px;
     }
     
     .itinerary-event {
-        font-size: 1rem;
-        padding-right: 10px;
+        font-size: 0.95rem;
+        padding-right: 0;
+        white-space: normal;
+        word-wrap: break-word;
+        width: 100%;
+        line-height: 1.4;
     }
     
     .itinerary-time {
-        font-size: 0.95rem;
-        padding-left: 10px;
+        font-size: 0.9rem;
+        padding-left: 0;
+        color: var(--primary-red);
+        font-weight: 600;
+        align-self: flex-end;
     }
     
     .itinerary-dots {
-        min-width: 30px;
+        display: none;
     }
     
     .itinerary-footer {
-        margin-top: 30px;
-        padding-top: 20px;
+        margin-top: 25px;
+        padding-top: 15px;
+        height: 25px;
+    }
+    
+    .itinerary-flourish-left,
+    .itinerary-flourish-right {
+        width: 80px;
+        height: 25px;
     }
     
     .itinerary-flourish-left {
-        transform: translateX(-60px);
+        transform: translateX(-50px);
     }
     
     .itinerary-flourish-right {
-        transform: translateX(60px);
+        transform: translateX(50px);
+    }
+    
+    .itinerary-flourish-left::before,
+    .itinerary-flourish-right::before {
+        width: 25px;
+        height: 25px;
     }
     
     .photo-carousel {
@@ -3253,6 +3855,98 @@ section.entourage-section {
     .entourage-grid-paired {
         grid-template-columns: 1fr 1fr;
         gap: 10px 8px;
+    }
+    
+    .entourage-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 5px;
+    }
+    
+    .entourage-card {
+        padding: 20px 12px;
+    }
+    
+    .entourage-card .card-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 12px;
+    }
+    
+    .entourage-card .card-title {
+        font-size: 1rem;
+    }
+    
+    .entourage-card .card-count {
+        font-size: 0.85rem;
+    }
+    
+    .entourage-modal-content {
+        width: 98%;
+        max-height: 90vh;
+    }
+    
+    .entourage-modal .modal-header {
+        padding: 20px 20px 15px;
+    }
+    
+    .entourage-modal .modal-title {
+        font-size: 1.3rem;
+    }
+    
+    .entourage-modal .modal-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .entourage-modal .modal-body {
+        padding: 20px 12px;
+    }
+    
+    .modal-pairs-container {
+        gap: 12px;
+    }
+    
+    .modal-pair-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 12px 8px;
+    }
+    
+    .modal-pair-row::before {
+        height: 30%;
+    }
+    
+    .modal-pair-row.single-member {
+        max-width: 180px;
+    }
+    
+    .modal-member-card {
+        padding: 15px 8px;
+    }
+    
+    .modal-member-photo {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .modal-member-name {
+        font-size: 0.85rem;
+        line-height: 1.3;
+    }
+    
+    .modal-members-grid:has(.modal-member-card:only-child) {
+        max-width: 200px;
+    }
+    
+    .modal-members-grid .modal-member-card:only-child {
+        max-width: 200px;
+    }
+    
+    .modal-member-card.pair-male::after,
+    .modal-member-card.pair-female::after {
+        font-size: 0.85rem;
+        top: 6px;
+        right: 6px;
     }
     
     .entourage-grid-single {

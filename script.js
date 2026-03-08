@@ -847,3 +847,280 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ===========================
+// ENTOURAGE MODAL FUNCTIONALITY
+// ===========================
+
+// Entourage data structure
+const entourageData = {
+    priest: {
+        title: 'Priest',
+        subtitle: '1 Member',
+        members: [
+            { name: 'Fr. Diony Tabiliran', gender: 'male' }
+        ]
+    },
+    principal: {
+        title: 'Principal Sponsors',
+        subtitle: '14 Members',
+        members: [
+            { name: 'Mr. Ismael L. Segundo', gender: 'male' },
+            { name: 'Mrs. Marvie O. Segundo', gender: 'female' },
+            { name: 'Mr. Ronald E. Reyes', gender: 'male' },
+            { name: 'Mrs. Ermelita L. Reyes', gender: 'female' },
+            { name: 'Mr. Dominador Lopez', gender: 'male' },
+            { name: 'Mrs. Meriam Llanes', gender: 'female' },
+            { name: 'Mr. Levin H. Velasco', gender: 'male' },
+            { name: 'Mrs. Marina R. Velasco', gender: 'female' },
+            { name: 'Atty. Wendel E. Avisado', gender: 'male' },
+            { name: 'Mrs. Joan D. Galarion', gender: 'female' },
+            { name: 'Mr. Lazaro F. Lamparas Jr.', gender: 'male' },
+            { name: 'Mrs. Rosalia D. Lamparas', gender: 'female' },
+            { name: 'Mr. Edgardo Amboy', gender: 'male' },
+            { name: 'Mrs. Nicanora D. Adlao', gender: 'female' }
+        ]
+    },
+    secondary: {
+        title: 'Secondary Sponsors',
+        subtitle: '4 Members',
+        members: [
+            { name: 'Mr. Carlito Omoso', gender: 'male' },
+            { name: 'Mrs. Presentacion Omoso', gender: 'female' },
+            { name: 'Mr. Neil B. Jadraque', gender: 'male' },
+            { name: 'Mrs. Peachy P. Jadraque', gender: 'female' }
+        ]
+    },
+    matron: {
+        title: 'Matron of Honor',
+        subtitle: '1 Member',
+        members: [
+            { name: 'Mrs. Betchie P. Toyama', gender: 'female' }
+        ]
+    },
+    bestman: {
+        title: 'Best Man',
+        subtitle: '1 Member',
+        members: [
+            { name: 'Mr. Ismael L. Segundo', gender: 'male' }
+        ]
+    },
+    bridesmaids: {
+        title: 'Bridesmaids & Groomsmen',
+        subtitle: '55 Members',
+        members: [
+            { name: 'Mr. Joey John Omoso', gender: 'male', group: 'red' },
+            { name: 'Mrs. Antonette L. Tanchico', gender: 'female', group: 'red' },
+            { name: 'Mr. Dionel Batistel', gender: 'male', group: 'red' },
+            { name: 'Mrs. Deborah Mae A. Batistel', gender: 'female', group: 'red' },
+            { name: 'Mr. Joselito Lonzon', gender: 'male', group: 'red' },
+            { name: 'Mrs. Gemma B. Lonzon', gender: 'female', group: 'red' },
+            { name: 'Mr. Michael John R. Bula', gender: 'male', group: 'red' },
+            { name: 'Mrs. Barbara J. Bula', gender: 'female', group: 'red' },
+            { name: 'Mr. Lowell Ted Sevilla', gender: 'male', group: 'red' },
+            { name: 'Mrs. Cossette Navales', gender: 'female', group: 'red' },
+            { name: 'Mr. Felix Bagol', gender: 'male', group: 'red' },
+            { name: 'Mrs. Beatriz Bagol', gender: 'female', group: 'red' },
+            { name: 'Mrs. Cecelia Cosing', gender: 'female', group: 'red' },
+            { name: 'Miss Dreamer Iactasa', gender: 'female', group: 'red' },
+            { name: 'Mr. Juerry Bemm P. Salva', gender: 'male', group: 'green' },
+            { name: 'Mrs. Sharade P. Fernandez', gender: 'female', group: 'green' },
+            { name: 'Mr. Cris L. Machitar', gender: 'male', group: 'green' },
+            { name: 'Mrs. Ma Lorena M. Machitar', gender: 'female', group: 'green' },
+            { name: 'Mr. Herosdie Cedeño', gender: 'male', group: 'green' },
+            { name: 'Mrs. Graldine Arobo', gender: 'female', group: 'green' },
+            { name: 'Mr. Louie John Omoso', gender: 'male', group: 'green' },
+            { name: 'Miss Louwela Dou', gender: 'female', group: 'green' },
+            { name: 'Mr. Michael Libetan', gender: 'male', group: 'green' },
+            { name: 'Mrs. Elsilyn Cuizon', gender: 'female', group: 'green' },
+            { name: 'Mr. Christain Kyle Crisologo', gender: 'male', group: 'green' },
+            { name: 'Mrs. Annabelle M. Crisologo', gender: 'female', group: 'green' },
+            { name: 'Mr. Emmanual P. Enojarda', gender: 'male', group: 'green' },
+            { name: 'Mrs. Joan Virador', gender: 'female', group: 'green' },
+            { name: 'Mr. Hermoso M. Matuguinas', gender: 'male', group: 'green' },
+            { name: 'Miss Alicia S. Dalumpines', gender: 'female', group: 'green' },
+            { name: 'Mr. Janel Omoso', gender: 'male', group: 'green' },
+            { name: 'Miss Irish Plaza', gender: 'female', group: 'green' },
+            { name: 'Mr. Nichole Alcebar', gender: 'male', group: 'green' },
+            { name: 'Mrs. Imee Johanne S. Alcebar', gender: 'female', group: 'green' },
+            { name: 'Mr. Jeremy R. Lopez', gender: 'male', group: 'green' },
+            { name: 'Mrs. Rochelle M. Lopez', gender: 'female', group: 'green' },
+            { name: 'Mr. Ruel Ceasar Cuizon', gender: 'male', group: 'green' },
+            { name: 'Mrs. Jenelyn Cuizon', gender: 'female', group: 'green' },
+            { name: 'Mr. Romie A. Cabatic', gender: 'male', group: 'green' },
+            { name: 'Mrs. Lady Diana O. Cabatic', gender: 'female', group: 'green' },
+            { name: 'Mr. Michael Aaron Cuizon', gender: 'male', group: 'blue' },
+            { name: 'Miss Niña Jade P. Fernandez', gender: 'female', group: 'blue' },
+            { name: 'Mr. Joseph Arol Cuizon', gender: 'male', group: 'blue' },
+            { name: 'Miss Joan Joy Diocampo', gender: 'female', group: 'blue' },
+            { name: 'Mr. Jay Are I. Maynagcot', gender: 'male', group: 'blue' },
+            { name: 'Miss Heidi R. Vleasco', gender: 'female', group: 'blue' },
+            { name: 'Mr. Deo Jean Ponce', gender: 'male', group: 'blue' },
+            { name: 'Miss Chamberlene M. Raotraot', gender: 'female', group: 'blue' },
+            { name: 'Mr. Ivan O. Segundo', gender: 'male', group: 'blue' },
+            { name: 'Miss Kyle Andrea A. Balbin', gender: 'female', group: 'blue' },
+            { name: 'Mr. Aaron Josh O. Cabatic', gender: 'male', group: 'blue' },
+            { name: 'Miss Nathalie Kate O. Cabatic', gender: 'female', group: 'blue' },
+            { name: 'Mr. Gregor Graf', gender: 'male', group: 'blue' },
+            { name: 'Miss Giamae B. Lonzon', gender: 'female', group: 'blue' },
+            { name: 'Miss Tracy Frances P. Fernandez', gender: 'female', group: 'blue' }
+        ]
+    },
+    flowergirls: {
+        title: 'Flower Girls',
+        subtitle: '5 Members',
+        members: [
+            { name: 'Angel Nicole Arobo', gender: 'female' },
+            { name: 'Cholenne Angela S. Alcebar', gender: 'female' },
+            { name: 'Shilo Faith O. Cabatic', gender: 'female' },
+            { name: 'Selena Marie C. Peter', gender: 'female' },
+            { name: 'Daniela Rizz A. Batistel', gender: 'female' }
+        ]
+    },
+    biblebearer: {
+        title: 'Bible Bearer',
+        subtitle: '1 Member',
+        members: [
+            { name: 'Imry L. Segundo', gender: 'male' }
+        ]
+    },
+    ringbearer: {
+        title: 'Ring Bearer',
+        subtitle: '1 Member',
+        members: [
+            { name: 'Zebi Crizeign M. Machitar', gender: 'male' }
+        ]
+    }
+};
+
+function openEntourageModal(category) {
+    const modal = document.getElementById('entourageModal');
+    const modalTitle = document.getElementById('entourageModalTitle');
+    const modalSubtitle = document.getElementById('entourageModalSubtitle');
+    const modalBody = document.getElementById('entourageModalBody');
+    
+    const data = entourageData[category];
+    
+    if (!data) {
+        console.error('Category not found:', category);
+        return;
+    }
+    
+    // Set title and subtitle
+    modalTitle.textContent = data.title;
+    modalSubtitle.textContent = data.subtitle;
+    
+    // Clear previous content
+    modalBody.innerHTML = '';
+    
+    // Check if this category should display in pairs
+    const pairedCategories = ['principal', 'secondary', 'bridesmaids'];
+    const isPaired = pairedCategories.includes(category);
+    
+    if (isPaired) {
+        // Create paired layout
+        const pairsContainer = document.createElement('div');
+        pairsContainer.className = 'modal-pairs-container';
+        
+        // Group members in pairs
+        for (let i = 0; i < data.members.length; i += 2) {
+            const male = data.members[i];
+            const female = data.members[i + 1];
+            
+            const pairRow = document.createElement('div');
+            pairRow.className = 'modal-pair-row';
+            
+            // If only one member in the pair, center it
+            if (!female) {
+                pairRow.classList.add('single-member');
+            }
+            
+            // Add group indicator for bridesmaids
+            if (male && male.group) {
+                pairRow.classList.add('group-' + male.group);
+            }
+            
+            // Male member
+            if (male) {
+                const maleCard = document.createElement('div');
+                maleCard.className = 'modal-member-card pair-male';
+                maleCard.innerHTML = `
+                    <div class="modal-member-photo">
+                        <img src="imgs/entourage/entouragepic.jpg" alt="${male.name}" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                    </div>
+                    <p class="modal-member-name">${male.name}</p>
+                `;
+                pairRow.appendChild(maleCard);
+            }
+            
+            // Female member
+            if (female) {
+                const femaleCard = document.createElement('div');
+                femaleCard.className = 'modal-member-card pair-female';
+                femaleCard.innerHTML = `
+                    <div class="modal-member-photo">
+                        <img src="imgs/entourage/entouragepic.jpg" alt="${female.name}" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                    </div>
+                    <p class="modal-member-name">${female.name}</p>
+                `;
+                pairRow.appendChild(femaleCard);
+            }
+            
+            pairsContainer.appendChild(pairRow);
+        }
+        
+        modalBody.appendChild(pairsContainer);
+    } else {
+        // Create regular grid for non-paired categories
+        const membersGrid = document.createElement('div');
+        membersGrid.className = 'modal-members-grid';
+        
+        data.members.forEach(member => {
+            const memberCard = document.createElement('div');
+            memberCard.className = 'modal-member-card';
+            
+            memberCard.innerHTML = `
+                <div class="modal-member-photo">
+                    <img src="imgs/entourage/entouragepic.jpg" alt="${member.name}" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                </div>
+                <p class="modal-member-name">${member.name}</p>
+            `;
+            
+            membersGrid.appendChild(memberCard);
+        });
+        
+        modalBody.appendChild(membersGrid);
+    }
+    
+    // Show modal with animation
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 10);
+}
+
+function closeEntourageModal() {
+    const modal = document.getElementById('entourageModal');
+    modal.style.opacity = '0';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('entourageModal');
+    if (event.target === modal) {
+        closeEntourageModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modal = document.getElementById('entourageModal');
+        if (modal && modal.style.display === 'block') {
+            closeEntourageModal();
+        }
+    }
+});
