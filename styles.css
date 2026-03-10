@@ -1431,7 +1431,6 @@ section.entourage-section {
 
 .entourage-card:hover {
     transform: translateY(-10px) scale(1.02);
-    border-color: var(--accent-gold);
     box-shadow: 0 15px 40px rgba(26, 58, 82, 0.15);
 }
 
@@ -1526,34 +1525,10 @@ section.entourage-section {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    border: 3px solid var(--accent-gold);
     animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Decorative corner ornaments */
-.entourage-modal-content::before,
-.entourage-modal-content::after {
-    content: '';
-    position: absolute;
-    width: 35px;
-    height: 35px;
-    border: 2.5px solid var(--accent-gold);
-    z-index: 1;
-}
-
-.entourage-modal-content::before {
-    top: 12px;
-    left: 12px;
-    border-right: none;
-    border-bottom: none;
-}
-
-.entourage-modal-content::after {
-    top: 12px;
-    right: 12px;
-    border-left: none;
-    border-bottom: none;
-}
+/* Decorative corner ornaments - removed */
 
 .entourage-modal-close {
     color: var(--text-light);
@@ -1586,7 +1561,6 @@ section.entourage-section {
     padding: 35px 50px 30px;
     text-align: center;
     position: relative;
-    border-bottom: 3px solid var(--accent-gold);
 }
 
 .entourage-modal .modal-header::after {
