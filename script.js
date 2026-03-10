@@ -505,112 +505,16 @@ document.addEventListener('DOMContentLoaded', function() {
 // RSVP modal functionality has been removed from the website
 
 // ===========================
-// PHOTO CAROUSEL
+// PHOTO CAROUSEL - Continuous Scroll
 // ===========================
 
 document.addEventListener('DOMContentLoaded', function() {
     const carousel = document.querySelector('.photo-carousel');
     if (!carousel) return;
 
-    const slides = carousel.querySelectorAll('.carousel-slide');
-    const prevBtn = carousel.querySelector('.prev-btn');
-    const nextBtn = carousel.querySelector('.next-btn');
-    const dotsContainer = carousel.querySelector('.carousel-dots');
-    
-    let currentSlide = 0;
-    let autoPlayInterval;
-
-    // Create dots
-    slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('carousel-dot');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index));
-        dotsContainer.appendChild(dot);
-    });
-
-    const dots = carousel.querySelectorAll('.carousel-dot');
-
-    function updateSlides() {
-        slides.forEach((slide, index) => {
-            slide.classList.remove('active');
-            dots[index].classList.remove('active');
-        });
-        slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        updateSlides();
-    }
-
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        updateSlides();
-    }
-
-    function goToSlide(index) {
-        currentSlide = index;
-        updateSlides();
-        resetAutoPlay();
-    }
-
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
-    }
-
-    function stopAutoPlay() {
-        clearInterval(autoPlayInterval);
-    }
-
-    function resetAutoPlay() {
-        stopAutoPlay();
-        startAutoPlay();
-    }
-
-    // Event listeners
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAutoPlay();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAutoPlay();
-    });
-
-    // Pause on hover, resume on mouse leave
-    carousel.addEventListener('mouseenter', stopAutoPlay);
-    carousel.addEventListener('mouseleave', startAutoPlay);
-
-    // Touch swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    carousel.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        stopAutoPlay();
-    }, { passive: true });
-
-    carousel.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-        startAutoPlay();
-    }, { passive: true });
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        if (touchEndX < touchStartX - swipeThreshold) {
-            nextSlide();
-        }
-        if (touchEndX > touchStartX + swipeThreshold) {
-            prevSlide();
-        }
-    }
-
-    // Start autoplay
-    startAutoPlay();
+    // The carousel now runs automatically with CSS animation
+    // No JavaScript needed for the scrolling effect
+    console.log('Continuous carousel loaded');
 });
 
 // ===========================
