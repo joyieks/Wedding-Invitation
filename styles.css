@@ -1431,6 +1431,7 @@ section.entourage-section {
 
 .entourage-card:hover {
     transform: translateY(-10px) scale(1.02);
+    border-color: var(--accent-gold);
     box-shadow: 0 15px 40px rgba(26, 58, 82, 0.15);
 }
 
@@ -1513,22 +1514,20 @@ section.entourage-section {
 }
 
 .entourage-modal-content {
-    background: linear-gradient(to bottom, #fafafa 0%, #ffffff 50%, #fafafa 100%);
+    background: white;
     margin: 2% auto;
     padding: 0;
-    border-radius: 12px;
+    border-radius: 16px;
     max-width: 900px;
     width: 92%;
     position: relative;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     max-height: 90vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
-/* Decorative corner ornaments - removed */
 
 .entourage-modal-close {
     color: var(--text-light);
@@ -1566,12 +1565,13 @@ section.entourage-section {
 .entourage-modal .modal-header::after {
     content: '';
     position: absolute;
-    bottom: -3px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
-    height: 3px;
-    background: var(--primary-red);
+    width: 100px;
+    height: 2px;
+    background: var(--accent-gold);
+    opacity: 0.6;
 }
 
 .entourage-modal .modal-title {
@@ -1650,9 +1650,9 @@ section.entourage-section {
     padding: 20px;
     background: #fafafa;
     border-radius: 12px;
-    border: 2px solid #e8e8e8;
     position: relative;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .modal-pair-row.single-member {
@@ -1663,9 +1663,8 @@ section.entourage-section {
 
 .modal-pair-row:hover {
     background: #f5f5f5;
-    border-color: var(--accent-gold);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Color indicators for bridesmaid groups */
@@ -1706,7 +1705,6 @@ section.entourage-section {
 
 .modal-member-card {
     background: white;
-    border: 2px solid #e8e8e8;
     border-radius: 10px;
     padding: 25px 20px;
     text-align: center;
@@ -1715,9 +1713,8 @@ section.entourage-section {
 }
 
 .modal-member-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    border-color: var(--accent-gold);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Single member card styling */
@@ -1786,12 +1783,12 @@ section.entourage-section {
     margin: 0 auto 15px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #f0f0f0;
-    transition: border-color 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
 .modal-member-card:hover .modal-member-photo {
-    border-color: var(--accent-gold);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .modal-member-photo img {
