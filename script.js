@@ -1,4 +1,45 @@
 // ===========================
+// IMAGE PROTECTION
+// ===========================
+
+// Prevent right-click, drag, and long-press on all images
+document.addEventListener('DOMContentLoaded', function() {
+    const allImages = document.querySelectorAll('img');
+    
+    allImages.forEach(img => {
+        // Disable right-click context menu
+        img.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Disable drag and drop
+        img.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Disable long-press on mobile
+        img.addEventListener('touchstart', (e) => {
+            img.style.webkitTouchCallout = 'none';
+        });
+        
+        // Additional protection attributes
+        img.setAttribute('draggable', 'false');
+        img.style.userSelect = 'none';
+        img.style.webkitUserSelect = 'none';
+    });
+    
+    // Also prevent right-click on the entire document
+    document.addEventListener('contextmenu', (e) => {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            return false;
+        }
+    });
+});
+
+// ===========================
 // BACKGROUND MUSIC CONTROL
 // ===========================
 
