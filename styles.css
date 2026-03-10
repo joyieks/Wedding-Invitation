@@ -2898,27 +2898,33 @@ section.entourage-section {
     
     .itinerary-row {
         padding: 14px 0;
-        flex-wrap: wrap;
-        gap: 8px;
+        flex-wrap: nowrap;
+        gap: 0;
     }
     
     .itinerary-event {
-        font-size: 1rem;
-        white-space: normal;
-        word-wrap: break-word;
-        flex: 1 1 auto;
+        font-size: 1.05rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 1;
         min-width: 0;
+        padding-right: 10px;
     }
     
     .itinerary-time {
-        font-size: 0.95rem;
+        font-size: 1rem;
         white-space: nowrap;
         flex-shrink: 0;
+        padding-left: 10px;
     }
     
     .itinerary-dots {
-        flex: 1 1 40px;
-        min-width: 20px;
+        flex: 1 1 auto;
+        min-width: 30px;
+        border-bottom: 2px dotted var(--accent-gold);
+        margin: 0 8px;
+        opacity: 0.4;
     }
     
     .entourage-grid {
@@ -3445,11 +3451,11 @@ section.entourage-section {
     
     /* Itinerary Responsive - Small Screens */
     .itinerary-section {
-        padding: 50px 15px;
+        padding: 50px 10px;
     }
     
     .itinerary-paper {
-        padding: 25px 15px;
+        padding: 20px 12px;
         margin-top: 20px;
     }
     
@@ -3475,10 +3481,11 @@ section.entourage-section {
     }
     
     .itinerary-row {
-        padding: 12px 5px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
+        padding: 10px 5px;
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+        flex-wrap: nowrap;
     }
     
     .itinerary-row:hover {
@@ -3487,24 +3494,31 @@ section.entourage-section {
     }
     
     .itinerary-event {
-        font-size: 0.95rem;
-        padding-right: 0;
-        white-space: normal;
-        word-wrap: break-word;
-        width: 100%;
-        line-height: 1.4;
+        font-size: 0.85rem;
+        padding-right: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 1;
+        min-width: 0;
+        line-height: 1.3;
     }
     
     .itinerary-time {
-        font-size: 0.9rem;
-        padding-left: 0;
+        font-size: 0.85rem;
+        padding-left: 8px;
         color: var(--primary-red);
         font-weight: 600;
-        align-self: flex-end;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
     
     .itinerary-dots {
-        display: none;
+        flex: 1 1 auto;
+        border-bottom: 1.5px dotted var(--accent-gold);
+        margin: 0 5px;
+        opacity: 0.4;
+        min-width: 20px;
     }
     
     .itinerary-footer {
@@ -5902,5 +5916,36 @@ section.entourage-section {
 
   .rsvp-modal-body .section-title {
     font-size: 1.6rem;
+  }
+}
+
+/* Extra Small Devices - iPhone SE and smaller */
+@media (max-width: 360px) {
+  .itinerary-paper {
+    padding: 18px 8px;
+  }
+
+  .itinerary-event {
+    font-size: 0.75rem;
+    padding-right: 5px;
+  }
+
+  .itinerary-time {
+    font-size: 0.75rem;
+    padding-left: 5px;
+  }
+
+  .itinerary-dots {
+    margin: 0 3px;
+    min-width: 15px;
+  }
+
+  .itinerary-monogram {
+    font-size: 1.6rem;
+  }
+
+  .itinerary-date {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
   }
 }

@@ -907,7 +907,7 @@ const entourageData = {
     },
     bridesmaids: {
         title: 'Bridesmaids & Groomsmen',
-        subtitle: '55 Members',
+        subtitle: '56 Members',
         members: [
             { name: 'Mr. Joey John Omoso', gender: 'male', group: 'red' },
             { name: 'Mrs. Antonette L. Tanchico', gender: 'female', group: 'red' },
@@ -955,7 +955,7 @@ const entourageData = {
             { name: 'Miss Joan Joy Diocampo', gender: 'female', group: 'blue' },
             { name: 'Mr. Jay Are I. Maynagcot', gender: 'male', group: 'blue' },
             { name: 'Miss Heidi R. Vleasco', gender: 'female', group: 'blue' },
-            { name: 'Mr. Deo Jean Ponce', gender: 'male', group: 'blue' },
+            { name: 'Mr. Ismael O. Segundo Jr.', gender: 'male', group: 'blue' },
             { name: 'Miss Chamberlene M. Raotraot', gender: 'female', group: 'blue' },
             { name: 'Mr. Ivan O. Segundo', gender: 'male', group: 'blue' },
             { name: 'Miss Kyle Andrea A. Balbin', gender: 'female', group: 'blue' },
@@ -963,6 +963,7 @@ const entourageData = {
             { name: 'Miss Nathalie Kate O. Cabatic', gender: 'female', group: 'blue' },
             { name: 'Mr. Gregor Graf', gender: 'male', group: 'blue' },
             { name: 'Miss Giamae B. Lonzon', gender: 'female', group: 'blue' },
+            { name: 'Mr. Deo Jean Ponce', gender: 'male', group: 'blue' },
             { name: 'Miss Tracy Frances P. Fernandez', gender: 'female', group: 'blue' }
         ]
     },
