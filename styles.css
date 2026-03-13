@@ -1722,34 +1722,9 @@ section.entourage-section {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.modal-member-card.pair-male {
-    border-left: 4px solid var(--primary-blue);
-    position: relative;
-}
-
-.modal-member-card.pair-male::after {
-    content: '♂';
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 1rem;
-    color: var(--primary-blue);
-    opacity: 0.3;
-}
-
+.modal-member-card.pair-male,
 .modal-member-card.pair-female {
-    border-left: 4px solid var(--primary-red);
     position: relative;
-}
-
-.modal-member-card.pair-female::after {
-    content: '♀';
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 1rem;
-    color: var(--primary-red);
-    opacity: 0.3;
 }
 
 .modal-member-card:hover {
