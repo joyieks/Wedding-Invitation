@@ -1003,9 +1003,17 @@ function lockEntourageBackgroundScroll() {
 }
 
 function unlockEntourageBackgroundScroll() {
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+
+    root.style.scrollBehavior = 'auto';
     document.body.classList.remove('entourage-modal-open');
     document.body.style.top = '';
     window.scrollTo(0, entourageModalScrollPosition);
+
+    requestAnimationFrame(() => {
+        root.style.scrollBehavior = previousScrollBehavior;
+    });
 }
 
 function openEntourageModal(category) {
