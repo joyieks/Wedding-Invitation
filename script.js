@@ -994,6 +994,20 @@ if (document.readyState === 'loading') {
     initializeEntouragePhotos();
 }
 
+let entourageModalScrollPosition = 0;
+
+function lockEntourageBackgroundScroll() {
+    entourageModalScrollPosition = window.scrollY || window.pageYOffset || 0;
+    document.body.classList.add('entourage-modal-open');
+    document.body.style.top = `-${entourageModalScrollPosition}px`;
+}
+
+function unlockEntourageBackgroundScroll() {
+    document.body.classList.remove('entourage-modal-open');
+    document.body.style.top = '';
+    window.scrollTo(0, entourageModalScrollPosition);
+}
+
 function openEntourageModal(category) {
     const modal = document.getElementById('entourageModal');
     const modalTitle = document.getElementById('entourageModalTitle');
@@ -1013,6 +1027,7 @@ function openEntourageModal(category) {
     
     // Clear previous content
     modalBody.innerHTML = '';
+    modalBody.scrollTop = 0;
     
     // Check if this category should display in pairs
     const pairedCategories = ['principal', 'secondary', 'bridesmaids'];
@@ -1094,6 +1109,7 @@ function openEntourageModal(category) {
     }
     
     // Show modal with animation
+    lockEntourageBackgroundScroll();
     modal.style.display = 'block';
     setTimeout(() => {
         modal.style.opacity = '1';
@@ -1105,6 +1121,7 @@ function closeEntourageModal() {
     modal.style.opacity = '0';
     setTimeout(() => {
         modal.style.display = 'none';
+        unlockEntourageBackgroundScroll();
     }, 300);
 }
 
