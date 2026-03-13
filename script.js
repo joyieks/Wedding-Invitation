@@ -939,6 +939,61 @@ const entourageData = {
     }
 };
 
+function getEntouragePhotoPath(name) {
+    const fallback = 'imgs/entourage/entouragepic.jpg';
+    if (!name) return fallback;
+
+    // Handle exceptional cases where display name doesn't match file naming.
+    const overrides = {
+        'fr diony tabiliran': 'priest.jpg',
+        'diony tabiliran': 'priest.jpg',
+        'deo jean ponce': 'deo-pinote.jpg',
+        'deo jean pinote': 'deo-pinote.jpg'
+    };
+
+    const normalized = name
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/\b(mr|mrs|miss|ms|atty|fr)\.?\b/g, '')
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    if (overrides[normalized]) {
+        return `imgs/entourage/${overrides[normalized]}`;
+    }
+
+    let tokens = normalized.split(' ').filter(Boolean);
+    tokens = tokens.filter(token => !['jr', 'sr', 'ii', 'iii', 'iv'].includes(token));
+    tokens = tokens.filter(token => token.length > 1 && token !== 'ma');
+
+    if (tokens.length < 2) {
+        return fallback;
+    }
+
+    const first = tokens[0];
+    const last = tokens[tokens.length - 1];
+    return `imgs/entourage/${first}-${last}.jpg`;
+}
+
+function initializeEntouragePhotos() {
+    const allEntourageImages = document.querySelectorAll('.entourage-member img');
+    allEntourageImages.forEach(img => {
+        const personName = img.alt || '';
+        img.src = getEntouragePhotoPath(personName);
+        img.onerror = function () {
+            this.src = 'imgs/entourage/entouragepic.jpg';
+        };
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeEntouragePhotos);
+} else {
+    initializeEntouragePhotos();
+}
+
 function openEntourageModal(category) {
     const modal = document.getElementById('entourageModal');
     const modalTitle = document.getElementById('entourageModalTitle');
@@ -992,7 +1047,7 @@ function openEntourageModal(category) {
                 maleCard.className = 'modal-member-card pair-male';
                 maleCard.innerHTML = `
                     <div class="modal-member-photo">
-                        <img src="imgs/entourage/entouragepic.jpg" alt="${male.name}" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                        <img src="${getEntouragePhotoPath(male.name)}" alt="${male.name}" onerror="this.src='imgs/entourage/entouragepic.jpg'">
                     </div>
                     <p class="modal-member-name">${male.name}</p>
                 `;
@@ -1005,7 +1060,7 @@ function openEntourageModal(category) {
                 femaleCard.className = 'modal-member-card pair-female';
                 femaleCard.innerHTML = `
                     <div class="modal-member-photo">
-                        <img src="imgs/entourage/entouragepic.jpg" alt="${female.name}" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                        <img src="${getEntouragePhotoPath(female.name)}" alt="${female.name}" onerror="this.src='imgs/entourage/entouragepic.jpg'">
                     </div>
                     <p class="modal-member-name">${female.name}</p>
                 `;
@@ -1027,7 +1082,7 @@ function openEntourageModal(category) {
             
             memberCard.innerHTML = `
                 <div class="modal-member-photo">
-                    <img src="imgs/entourage/entouragepic.jpg" alt="${member.name}" onerror="this.src='imgs/entourage/entouragepic.jpg'">
+                    <img src="${getEntouragePhotoPath(member.name)}" alt="${member.name}" onerror="this.src='imgs/entourage/entouragepic.jpg'">
                 </div>
                 <p class="modal-member-name">${member.name}</p>
             `;
