@@ -873,7 +873,7 @@ const entourageData = {
             { name: 'Mr. Cris L. Machitar', gender: 'male', group: 'green' },
             { name: 'Mrs. Ma Lorena M. Machitar', gender: 'female', group: 'green' },
             { name: 'Mr. Herosdie Cedeño', gender: 'male', group: 'green' },
-            { name: 'Mrs. Graldine Arobo', gender: 'female', group: 'green' },
+            { name: 'Mrs. Geraldine Arobo', gender: 'female', group: 'green' },
             { name: 'Mr. Louie John Omoso', gender: 'male', group: 'green' },
             { name: 'Miss Louwela Dou', gender: 'female', group: 'green' },
             { name: 'Mr. Michael Libetan', gender: 'male', group: 'green' },
@@ -914,13 +914,14 @@ const entourageData = {
     },
     flowergirls: {
         title: 'Flower Girls',
-        subtitle: '5 Members',
+        subtitle: '6 Members',
         members: [
             { name: 'Angel Nicole Arobo', gender: 'female' },
             { name: 'Cholenne Angela S. Alcebar', gender: 'female' },
             { name: 'Shilo Faith O. Cabatic', gender: 'female' },
             { name: 'Selena Marie C. Peter', gender: 'female' },
-            { name: 'Daniela Rizz A. Batistel', gender: 'female' }
+            { name: 'Daniela Rizz A. Batistel', gender: 'female' },
+            { name: 'Selah Lois S. Sevilla', gender: 'female' }
         ]
     },
     biblebearer: {
@@ -947,9 +948,37 @@ function getEntouragePhotoPath(name) {
     const overrides = {
         'fr diony tabiliran': 'priest.jpg',
         'diony tabiliran': 'priest.jpg',
-        'deo jean ponce': 'deo-pinote.jpg',
+        'deo jean ponce': 'deojeanponce.png',
         'deo jean pinote': 'deo-pinote.jpg',
-        'lady diana o cabatic': 'ladydianacabatic.jpg'
+        'lady diana o cabatic': 'ladydianacabatic.jpg',
+        'geraldine arobo': 'geraldinearobo.png',
+        'graldine arobo': 'geraldinearobo.png',
+        'lowell ted sevilla': 'lowellted sevilla.png',
+        'juerry bemm p salva': 'juerrybemmsalva.png',
+        'juerry bemm salva': 'juerrybemmsalva.png',
+        'herosdie cedeno': 'herosdiecedeño.png',
+        'louwela dou': 'louweladou.png',
+        'angel nicole arobo': 'angelarobo.png',
+        'chamberlene m raotraot': 'chamberlene.png',
+        'cris l machitar': 'cris-machitar.png',
+        'imry l segundo': 'imry-segundo.png',
+        'marvie o segundo': 'marvie-segundo.png',
+        'nina jade p fernandez': 'ninajadefernandez.png',
+        'antonette l tanchico': 'antonette-tanchico.png',
+        'selena marie c peter': 'selena-peter.png',
+        'tracy frances p fernandez': 'tracyfrances.png',
+        'zebi crizeign m machitar': 'zebimachitar.png',
+        'joan joy diocampo': 'joanjoydiocampo.jpg',
+        'alicia s dalumpines': 'aliciadalumpines.png',
+        'gemma b lonzon': 'gemma-lonzon.png',
+        'irish plaza': 'irishplaza.png',
+        'ismael o segundo jr': 'ismaelOsegundojr.png',
+        'jenelyn cuizon': 'jenelyncuizon.png',
+        'joselito lonzon': 'joselito-lonzon.png',
+        'joseph arol cuizon': 'josepharol cuizon.png',
+        'michael aaron cuizon': 'michaelaaroncuizon.png',
+        'ruel ceasar cuizon': 'ruelceasarcuizon.png',
+        'joan virador': 'joan-virador.png'
     };
 
     const normalized = name
@@ -996,6 +1025,8 @@ if (document.readyState === 'loading') {
 }
 
 let entourageModalScrollPosition = 0;
+let entourageModalOpenedAt = 0;
+let entouragePersonModalOpenedAt = 0;
 
 function lockEntourageBackgroundScroll() {
     entourageModalScrollPosition = window.scrollY || window.pageYOffset || 0;
@@ -1120,6 +1151,7 @@ function openEntourageModal(category) {
     // Show modal with animation
     lockEntourageBackgroundScroll();
     modal.style.display = 'block';
+    entourageModalOpenedAt = Date.now();
     setTimeout(() => {
         modal.style.opacity = '1';
     }, 10);
@@ -1154,6 +1186,7 @@ function openEntouragePersonModal(name, imageSrc) {
     personModal.style.display = 'flex';
     personModal.style.opacity = '1';
     personModal.setAttribute('aria-hidden', 'false');
+    entouragePersonModalOpenedAt = Date.now();
 }
 
 function closeEntouragePersonModal() {
@@ -1201,10 +1234,16 @@ document.addEventListener('click', function(event) {
     const personModal = document.getElementById('entouragePersonModal');
 
     if (event.target === entourageModal) {
+        if (Date.now() - entourageModalOpenedAt < 350) {
+            return;
+        }
         closeEntourageModal();
     }
 
     if (event.target === personModal) {
+        if (Date.now() - entouragePersonModalOpenedAt < 350) {
+            return;
+        }
         closeEntouragePersonModal();
     }
 });

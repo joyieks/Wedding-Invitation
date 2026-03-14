@@ -64,7 +64,7 @@ This folder contains photos for all wedding entourage members.
 - cris-machitar.jpg - Mr. Cris L. Machitar
 - lorena-machitar.jpg - Mrs. Ma Lorena M. Machitar
 - herosdie-cedeno.jpg - Mr. Herosdie Cedeño
-- graldine-arobo.jpg - Mrs. Graldine Arobo
+- geraldinearobo.png - Mrs. Geraldine Arobo
 - louie-omoso.jpg - Mr. Louie John Omoso
 - louwela-dou.jpg - Miss Louwela Dou
 - michael-libetan.jpg - Mr. Michael Libetan
