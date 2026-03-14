@@ -1171,26 +1171,21 @@ function closeEntouragePersonModal() {
 
 function bindEntouragePersonPopup() {
     document.addEventListener('click', function(event) {
-        const photoContainer = event.target.closest('.member-photo, .modal-member-photo');
-        if (!photoContainer) {
+        const memberCard = event.target.closest('.entourage-member, .modal-member-card');
+        if (!memberCard) {
             return;
         }
 
-        const parentCard = photoContainer.closest('.entourage-member, .modal-member-card');
-        if (!parentCard) {
-            return;
-        }
-
-        const image = photoContainer.querySelector('img');
+        const image = memberCard.querySelector('.member-photo img, .modal-member-photo img, img');
         if (!image) {
             return;
         }
 
         event.stopPropagation();
 
-        const nameElement = parentCard.querySelector('.member-name, .modal-member-name');
+        const nameElement = memberCard.querySelector('.member-name, .modal-member-name');
         const personName = (nameElement && nameElement.textContent ? nameElement.textContent : image.alt || '').trim();
-        openEntouragePersonModal(personName, image.currentSrc || image.src);
+        openEntouragePersonModal(personName, image.currentSrc || image.src || getEntouragePhotoPath(personName));
     });
 }
 
