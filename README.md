@@ -71,11 +71,11 @@ Edit or add FAQ items in `index.html` under the FAQ section.
 
 ### 7. Wedding Date & Time
 
-The wedding date is set to **May 18, 2026 at 4:00 PM**. To change it:
+The wedding date is set to **May 19, 2026 at 1:00 PM**. To change it:
 
 In `script.js`, update line 7:
 ```javascript
-const weddingDate = new Date('May 18, 2026 16:00:00').getTime();
+const weddingDate = new Date('May 19, 2026 13:00:00').getTime();
 ```
 
 ### 8. RSVP Form Backend (Optional)
@@ -173,4 +173,4 @@ The website is optimized for mobile viewing:
 
 **Made with ❤️ for Sharon & Perry**
 
-*Wedding Date: May 18, 2026*
+*Wedding Date: May 19, 2026*

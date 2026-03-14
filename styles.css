@@ -1304,12 +1304,18 @@ section.entourage-section {
     overflow: hidden;
     border: none;
     box-shadow: none;
+    cursor: pointer;
+    transition: transform 0.25s ease;
 }
 
 .member-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.member-photo:hover {
+    transform: scale(1.05);
 }
 
 .member-role {
@@ -1753,6 +1759,7 @@ section.entourage-section {
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .modal-member-card:hover .modal-member-photo {
@@ -1774,6 +1781,71 @@ section.entourage-section {
     line-height: 1.4;
     word-wrap: break-word;
     overflow-wrap: break-word;
+}
+
+.entourage-person-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 11000;
+    background: rgba(0, 0, 0, 0.88);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.entourage-person-modal-content {
+    position: relative;
+    background: white;
+    width: min(92vw, 420px);
+    border-radius: 16px;
+    padding: 24px 24px 20px;
+    text-align: center;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+    animation: modalSlideIn 0.25s ease;
+}
+
+.entourage-person-modal-close {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    font-size: 34px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.entourage-person-modal-close:hover {
+    color: var(--primary-red);
+    transform: scale(1.06);
+}
+
+.entourage-person-image-wrap {
+    width: min(70vw, 250px);
+    height: min(70vw, 250px);
+    margin: 8px auto 16px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.entourage-person-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.entourage-person-name {
+    font-family: var(--font-heading);
+    color: var(--primary-blue);
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin: 0;
 }
 
 /* ===========================

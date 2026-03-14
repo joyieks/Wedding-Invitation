@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===========================
 
 function updateCountdown() {
-    const weddingDate = new Date('May 18, 2026 16:00:00').getTime();
+    const weddingDate = new Date('May 19, 2026 13:00:00').getTime();
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
@@ -948,7 +948,8 @@ function getEntouragePhotoPath(name) {
         'fr diony tabiliran': 'priest.jpg',
         'diony tabiliran': 'priest.jpg',
         'deo jean ponce': 'deo-pinote.jpg',
-        'deo jean pinote': 'deo-pinote.jpg'
+        'deo jean pinote': 'deo-pinote.jpg',
+        'lady diana o cabatic': 'ladydianacabatic.jpg'
     };
 
     const normalized = name
@@ -1133,17 +1134,95 @@ function closeEntourageModal() {
     }, 300);
 }
 
+function openEntouragePersonModal(name, imageSrc) {
+    const personModal = document.getElementById('entouragePersonModal');
+    const personImage = document.getElementById('entouragePersonImage');
+    const personName = document.getElementById('entouragePersonName');
+
+    if (!personModal || !personImage || !personName) {
+        return;
+    }
+
+    const fallback = 'imgs/entourage/entouragepic.jpg';
+    personImage.src = imageSrc || fallback;
+    personImage.alt = name || 'Entourage member';
+    personImage.onerror = function () {
+        this.src = fallback;
+    };
+    personName.textContent = name || 'Entourage Member';
+
+    personModal.style.display = 'flex';
+    personModal.style.opacity = '1';
+    personModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeEntouragePersonModal() {
+    const personModal = document.getElementById('entouragePersonModal');
+    if (!personModal) {
+        return;
+    }
+
+    personModal.style.opacity = '0';
+    setTimeout(() => {
+        personModal.style.display = 'none';
+        personModal.setAttribute('aria-hidden', 'true');
+    }, 200);
+}
+
+function bindEntouragePersonPopup() {
+    document.addEventListener('click', function(event) {
+        const photoContainer = event.target.closest('.member-photo, .modal-member-photo');
+        if (!photoContainer) {
+            return;
+        }
+
+        const parentCard = photoContainer.closest('.entourage-member, .modal-member-card');
+        if (!parentCard) {
+            return;
+        }
+
+        const image = photoContainer.querySelector('img');
+        if (!image) {
+            return;
+        }
+
+        event.stopPropagation();
+
+        const nameElement = parentCard.querySelector('.member-name, .modal-member-name');
+        const personName = (nameElement && nameElement.textContent ? nameElement.textContent : image.alt || '').trim();
+        openEntouragePersonModal(personName, image.currentSrc || image.src);
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindEntouragePersonPopup);
+} else {
+    bindEntouragePersonPopup();
+}
+
 // Close modal when clicking outside
 document.addEventListener('click', function(event) {
-    const modal = document.getElementById('entourageModal');
-    if (event.target === modal) {
+    const entourageModal = document.getElementById('entourageModal');
+    const personModal = document.getElementById('entouragePersonModal');
+
+    if (event.target === entourageModal) {
         closeEntourageModal();
+    }
+
+    if (event.target === personModal) {
+        closeEntouragePersonModal();
     }
 });
 
 // Close modal with Escape key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
+        const personModal = document.getElementById('entouragePersonModal');
+        if (personModal && personModal.style.display === 'flex') {
+            closeEntouragePersonModal();
+            return;
+        }
+
         const modal = document.getElementById('entourageModal');
         if (modal && modal.style.display === 'block') {
             closeEntourageModal();
