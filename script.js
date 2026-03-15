@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===========================
 
 function updateCountdown() {
-    const weddingDate = new Date('May 19, 2026 13:00:00').getTime();
+    const weddingDate = new Date('May 20, 2026 13:00:00').getTime();
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
@@ -653,7 +653,7 @@ function showAttireModal(category, colorClass, name) {
     // Check if Principal Sponsor
     if (category.includes('Principal Sponsors') || category.includes('Secondary Sponsors')) {
         imagePath = 'imgs/outfits/sponsors.png';
-        title = 'Principal Sponsors';
+        title = 'Sponsors';
         
         // Determine if male or female based on title
         if (name.toLowerCase().includes('mr.') || name.toLowerCase().includes('atty.')) {
@@ -750,7 +750,25 @@ function showAttireModal(category, colorClass, name) {
                       createAttireItem('Shoes', 'Black formal shoes') +
                       '<div class="attire-note">Please contact Perry for specific necktie color/pattern.</div>';
     }
-    // Other roles (Priest, Flower Girls, Ring Bearer, etc.)
+    // Flower Girls
+    else if (category.includes('Flower Girls')) {
+        imagePath = 'imgs/outfits/flowergirls.png';
+        title = 'Flower Girls';
+        subtitle = '';
+        instructions = createAttireItem('Attire', 'Flower girl dress') +
+                      createAttireItem('Style', 'Formal and age-appropriate') +
+                      '<div class="attire-note">Please coordinate final style details with the couple.</div>';
+    }
+    // Bible Bearer / Ring Bearer
+    else if (category.includes('Bible Bearer') || category.includes('Ring Bearer')) {
+        imagePath = 'imgs/outfits/flowerboy.png';
+        title = category;
+        subtitle = '';
+        instructions = createAttireItem('Attire', 'Formal boy outfit') +
+                      createAttireItem('Style', 'Neat and ceremonial') +
+                      '<div class="attire-note">Please coordinate final style details with the couple.</div>';
+    }
+    // Other roles (Priest and remaining roles)
     else {
         imagePath = 'imgs/outfits/outfittogether.png';
         title = 'Wedding Party';
@@ -863,11 +881,11 @@ const entourageData = {
             { name: 'Mr. Michael John R. Bula', gender: 'male', group: 'red' },
             { name: 'Mrs. Barbara J. Bula', gender: 'female', group: 'red' },
             { name: 'Mr. Lowell Ted Sevilla', gender: 'male', group: 'red' },
+            { name: 'Mrs. Ennah May S. Sevilla', gender: 'female', group: 'red' },
+            { name: 'Mr. Bernard Ponce', gender: 'male', group: 'red' },
             { name: 'Mrs. Cossette Navales', gender: 'female', group: 'red' },
             { name: 'Mr. Felix Bagol', gender: 'male', group: 'red' },
             { name: 'Mrs. Beatriz Bagol', gender: 'female', group: 'red' },
-            { name: 'Mrs. Cecelia Cosing', gender: 'female', group: 'red' },
-            { name: 'Miss Dreamer Iactasa', gender: 'female', group: 'red' },
             { name: 'Mr. Juerry Bemm P. Salva', gender: 'male', group: 'green' },
             { name: 'Mrs. Sharade P. Fernandez', gender: 'female', group: 'green' },
             { name: 'Mr. Cris L. Machitar', gender: 'male', group: 'green' },
@@ -882,7 +900,7 @@ const entourageData = {
             { name: 'Mrs. Annabelle M. Crisologo', gender: 'female', group: 'green' },
             { name: 'Mr. Emmanual P. Enojarda', gender: 'male', group: 'green' },
             { name: 'Mrs. Joan Virador', gender: 'female', group: 'green' },
-            { name: 'Mr. Hermoso M. Matuguinas', gender: 'male', group: 'green' },
+            { name: 'Mr. Kenneth Ceballos', gender: 'male', group: 'green' },
             { name: 'Miss Alicia S. Dalumpines', gender: 'female', group: 'green' },
             { name: 'Mr. Janel Omoso', gender: 'male', group: 'green' },
             { name: 'Miss Irish Plaza', gender: 'female', group: 'green' },
@@ -950,6 +968,26 @@ function getEntouragePhotoPath(name) {
         'diony tabiliran': 'priest.jpg',
         'deo jean ponce': 'deojeanponce.png',
         'deo jean pinote': 'deo-pinote.jpg',
+        'bernard ponce': 'bernardponce.png',
+        'cholenne angela s alcebar': 'cholennealcebar.png',
+        'imee johanne s alcebar': 'imeealcebar.png',
+        'joan d galarion': 'joan-galarion.png',
+        'kyle andrea a balbin': 'kylebalbin.png',
+        'michael libetan': 'michael-libetan.png',
+        'nicanora d adlao': 'nicanora-adlao.png',
+        'nichole alcebar': 'nicholealcebar.png',
+        'ivan o segundo': 'ivan-segundo.png',
+        'janel omoso': 'janelomoso.png',
+        'aaron josh o cabatic': 'aaroncabatic.png',
+        'romie a cabatic': 'romiecabatic.png',
+        'nathalie kate o cabatic': 'nathaliecabatic.png',
+        'peachy p jadraque': 'peachy-jadraque.png',
+        'christain kyle crisologo': 'christain-crisologo.png',
+        'annabelle m crisologo': 'anabellecrisologo.png',
+        'emmanual p enojarda': 'emmanuelenorjada.png',
+        'cossette navales': 'cossette-navales.png',
+        'ennah may s sevilla': 'ennahsevilla.png',
+        'kenneth ceballos': 'kennethceballos.png',
         'lady diana o cabatic': 'ladydianacabatic.jpg',
         'geraldine arobo': 'geraldinearobo.png',
         'graldine arobo': 'geraldinearobo.png',
