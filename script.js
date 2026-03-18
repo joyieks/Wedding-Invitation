@@ -834,7 +834,7 @@ const entourageData = {
             { name: 'Mrs. Ermelita L. Reyes', gender: 'female' },
             { name: 'Mr. Dominador Lopez', gender: 'male' },
             { name: 'Mrs. Meriam Llanes', gender: 'female' },
-            { name: 'Mr. Levin H. Velasco', gender: 'male' },
+            { name: 'Mr. Nestor Cadavas', gender: 'male' },
             { name: 'Mrs. Marina R. Velasco', gender: 'female' },
             { name: 'Atty. Wendel E. Avisado', gender: 'male' },
             { name: 'Mrs. Joan D. Galarion', gender: 'female' },
@@ -932,14 +932,15 @@ const entourageData = {
     },
     flowergirls: {
         title: 'Flower Girls',
-        subtitle: '6 Members',
+        subtitle: '7 Members',
         members: [
             { name: 'Angel Nicole Arobo', gender: 'female' },
             { name: 'Cholenne Angela S. Alcebar', gender: 'female' },
             { name: 'Shilo Faith O. Cabatic', gender: 'female' },
             { name: 'Selena Marie C. Peter', gender: 'female' },
             { name: 'Daniela Rizz A. Batistel', gender: 'female' },
-            { name: 'Selah Lois S. Sevilla', gender: 'female' }
+            { name: 'Selah Lois S. Sevilla', gender: 'female' },
+            { name: 'Cerys Esmeray Segundo', gender: 'female' }
         ]
     },
     biblebearer: {
@@ -994,6 +995,19 @@ function getEntouragePhotoPath(name) {
         'lowell ted sevilla': 'lowellted sevilla.png',
         'juerry bemm p salva': 'juerrybemmsalva.png',
         'juerry bemm salva': 'juerrybemmsalva.png',
+        'jeremy r lopez': 'jeremylopez.png',
+        'jeremy lopez': 'jeremylopez.png',
+        'presentacion omoso': 'presentacion-omoso.png',
+        'rochelle m lopez': 'rochelle-lopez.png',
+        'rochelle lopez': 'rochelle-lopez.png',
+        'selah lois s sevilla': 'selahsevilla.png',
+        'giamae b lonzon': 'giamaelonzon.png',
+        'gregor graf': 'gregorgraf.png',
+        'elsilyn cuizon': 'elsilyn-cuizon.png',
+        'daniela rizz a batistel': 'danielabatistel.png',
+        'cerys esmeray segundo': 'cerysesmeraysegundo.png',
+        'carlito omoso': 'carlito-omoso.png',
+        'nestor cadavas': 'nestorcadavas.png',
         'herosdie cedeno': 'herosdiecedeño.png',
         'louwela dou': 'louweladou.png',
         'angel nicole arobo': 'angelarobo.png',
