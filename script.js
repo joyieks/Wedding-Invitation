@@ -870,7 +870,7 @@ const entourageData = {
     },
     bridesmaids: {
         title: 'Bridesmaids & Groomsmen',
-        subtitle: '58 Members',
+        subtitle: '60 Members',
         members: [
             { name: 'Mr. Joey John Omoso', gender: 'male', group: 'red' },
             { name: 'Mrs. Antonette L. Tanchico', gender: 'female', group: 'red' },
@@ -886,6 +886,8 @@ const entourageData = {
             { name: 'Mrs. Cossette Navales', gender: 'female', group: 'red' },
             { name: 'Mr. Felix Bagol', gender: 'male', group: 'red' },
             { name: 'Mrs. Beatriz Bagol', gender: 'female', group: 'red' },
+            { name: 'Mrs. Cecelia Cosing', gender: 'female', group: 'red' },
+            { name: 'Miss Dreamer Lactasa', gender: 'female', group: 'red' },
             { name: 'Mr. Benedict Maboloc', gender: 'male', group: 'red' },
             { name: 'Miss Alicia S. Dalumpines', gender: 'female', group: 'red' },
             { name: 'Mr. Juerry Bemm P. Salva', gender: 'male', group: 'green' },
@@ -1015,6 +1017,8 @@ function getEntouragePhotoPath(name) {
         'nestor cadavas': 'nestorcadavas.png',
         'stephanie racho': 'stephanieracho.png',
         'benedict maboloc': 'benedictmaboloc.png',
+        'cecelia cosing': 'ceceliacosing.jpg',
+        'dreamer lactasa': 'dreamerlactasa.jpg',
         'herosdie cedeno': 'herosdiecedeño.png',
         'louwela dou': 'louweladou.png',
         'angel nicole arobo': 'angelarobo.png',
