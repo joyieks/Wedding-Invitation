@@ -363,6 +363,94 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===========================
+// PRENUP VIDEO SCROLL PLAYBACK
+// ===========================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const prenupVideo = document.querySelector('.prenup-video');
+    const music = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = musicToggle ? musicToggle.querySelector('.music-icon') : null;
+
+    if (!prenupVideo) {
+        return;
+    }
+
+    function setMusicUi(isMuted) {
+        if (!musicToggle || !musicIcon) {
+            return;
+        }
+
+        if (isMuted) {
+            musicToggle.classList.add('muted');
+            musicIcon.textContent = '🔇';
+        } else {
+            musicToggle.classList.remove('muted');
+            musicIcon.textContent = '🔊';
+            musicToggle.style.animation = 'none';
+        }
+    }
+
+    function resumeBackgroundMusic() {
+        if (!music) {
+            return;
+        }
+
+        const resumePromise = music.play();
+        if (resumePromise !== undefined) {
+            resumePromise.then(() => {
+                setMusicUi(false);
+            }).catch(() => {
+                // Ignore autoplay restrictions when trying to resume music.
+            });
+        }
+    }
+
+    // Keep it paused until the section is visible.
+    prenupVideo.pause();
+
+    prenupVideo.addEventListener('play', function() {
+        if (!music) {
+            return;
+        }
+
+        if (!music.paused) {
+            music.pause();
+        }
+        setMusicUi(true);
+    });
+
+    prenupVideo.addEventListener('pause', function() {
+        if (!prenupVideo.ended) {
+            resumeBackgroundMusic();
+        }
+    });
+
+    prenupVideo.addEventListener('ended', function() {
+        resumeBackgroundMusic();
+    });
+
+    const videoVisibilityObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const playPromise = prenupVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        // Ignore autoplay rejections on strict browsers.
+                    });
+                }
+            } else {
+                prenupVideo.pause();
+            }
+        });
+    }, {
+        threshold: 0.4
+    });
+
+    videoVisibilityObserver.observe(prenupVideo);
+});
+
+// ===========================
 // GALLERY IMAGE LIGHTBOX (SIMPLE)
 // ===========================
 
@@ -750,10 +838,10 @@ function showAttireModal(category, colorClass, name) {
                       createAttireItem('Shoes', 'Black formal shoes') +
                       '<div class="attire-note">Please contact Perry for specific necktie color/pattern.</div>';
     }
-    // Flower Girls
+    // Flower Girls and Flower Boys
     else if (category.includes('Flower Girls')) {
         imagePath = 'imgs/outfits/flowergirls.png';
-        title = 'Flower Girls';
+        title = 'Flower Girls and Flower Boys';
         subtitle = '';
         instructions = createAttireItem('Attire', 'Flower girl dress') +
                       createAttireItem('Style', 'Formal and age-appropriate') +
@@ -870,7 +958,7 @@ const entourageData = {
     },
     bridesmaids: {
         title: 'Bridesmaids & Groomsmen',
-        subtitle: '60 Members',
+        subtitle: '62 Members',
         members: [
             { name: 'Mr. Joey John Omoso', gender: 'male', group: 'red' },
             { name: 'Mrs. Antonette L. Tanchico', gender: 'female', group: 'red' },
@@ -890,6 +978,10 @@ const entourageData = {
             { name: 'Miss Dreamer Lactasa', gender: 'female', group: 'red' },
             { name: 'Mr. Benedict Maboloc', gender: 'male', group: 'red' },
             { name: 'Miss Alicia S. Dalumpines', gender: 'female', group: 'red' },
+            { name: 'Mr. Lory S. Diao', gender: 'male', group: 'red' },
+            { name: 'Mrs. Maan Bito', gender: 'female', group: 'red' },
+            { name: 'Mr. Jeremy R. Lopez', gender: 'male', group: 'green' },
+            { name: 'Mrs. Rochelle M. Lopez', gender: 'female', group: 'green' },
             { name: 'Mr. Juerry Bemm P. Salva', gender: 'male', group: 'green' },
             { name: 'Mrs. Sharade P. Fernandez', gender: 'female', group: 'green' },
             { name: 'Mr. Cris L. Machitar', gender: 'male', group: 'green' },
@@ -910,8 +1002,6 @@ const entourageData = {
             { name: 'Miss Irish Plaza', gender: 'female', group: 'green' },
             { name: 'Mr. Nichole Alcebar', gender: 'male', group: 'green' },
             { name: 'Mrs. Imee Johanne S. Alcebar', gender: 'female', group: 'green' },
-            { name: 'Mr. Jeremy R. Lopez', gender: 'male', group: 'green' },
-            { name: 'Mrs. Rochelle M. Lopez', gender: 'female', group: 'green' },
             { name: 'Mr. Ruel Ceasar Cuizon', gender: 'male', group: 'green' },
             { name: 'Mrs. Jenelyn Cuizon', gender: 'female', group: 'green' },
             { name: 'Mr. Romie A. Cabatic', gender: 'male', group: 'green' },
@@ -935,8 +1025,8 @@ const entourageData = {
         ]
     },
     flowergirls: {
-        title: 'Flower Girls',
-        subtitle: '7 Members',
+        title: 'Flower Girls and Flower Boys',
+        subtitle: '8 Members',
         members: [
             { name: 'Angel Nicole Arobo', gender: 'female' },
             { name: 'Cholenne Angela S. Alcebar', gender: 'female' },
@@ -944,7 +1034,8 @@ const entourageData = {
             { name: 'Selena Marie C. Peter', gender: 'female' },
             { name: 'Daniela Rizz A. Batistel', gender: 'female' },
             { name: 'Selah Lois S. Sevilla', gender: 'female' },
-            { name: 'Cerys Esmeray Segundo', gender: 'female' }
+            { name: 'Cerys Esmeray Segundo', gender: 'female' },
+            { name: 'Zebi Crizeign M. Machitar', gender: 'male' }
         ]
     },
     biblebearer: {
@@ -958,7 +1049,7 @@ const entourageData = {
         title: 'Ring Bearer',
         subtitle: '1 Member',
         members: [
-            { name: 'Zebi Crizeign M. Machitar', gender: 'male' }
+            { name: 'Dwayne Alexander Bandalan', gender: 'male' }
         ]
     }
 };
@@ -1017,6 +1108,8 @@ function getEntouragePhotoPath(name) {
         'nestor cadavas': 'nestorcadavas.png',
         'stephanie racho': 'stephanieracho.png',
         'benedict maboloc': 'benedictmaboloc.png',
+        'lory s diao': 'lorydiao.png',
+        'maan bito': 'maanbito.png',
         'cecelia cosing': 'ceceliacosing.jpg',
         'dreamer lactasa': 'dreamerlactasa.jpg',
         'herosdie cedeno': 'herosdiecedeño.png',
@@ -1031,6 +1124,7 @@ function getEntouragePhotoPath(name) {
         'selena marie c peter': 'selena-peter.png',
         'tracy frances p fernandez': 'tracyfrances.png',
         'zebi crizeign m machitar': 'zebimachitar.png',
+        'dwayne alexander bandalan': 'dwaynebandalan.png',
         'joan joy diocampo': 'joanjoydiocampo.jpg',
         'alicia s dalumpines': 'aliciadalumpines.png',
         'gemma b lonzon': 'gemma-lonzon.png',
